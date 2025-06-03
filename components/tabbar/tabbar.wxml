@@ -1,0 +1,23 @@
+<view class="tabbar">
+  <view class="tab-item {{active==='index'?'active':''}}" bindtap="onTab" data-page="index">
+    <view class="tab-icon-svg">
+      <svg width="48" height="48" viewBox="0 0 48 48">
+        <path d="M8 22L24 10L40 22" stroke="white" stroke-width="4" fill="none"/>
+        <rect x="14" y="22" width="20" height="14" rx="2" stroke="white" stroke-width="4" fill="none"/>
+      </svg>
+    </view>
+    <text>首页</text>
+  </view>
+  <view class="tab-center">
+    <view class="center-icon"></view>
+  </view>
+  <view class="tab-item {{active==='profile'?'active':''}}" bindtap="onTab" data-page="profile">
+    <view class="tab-icon-svg">
+      <svg width="48" height="48" viewBox="0 0 48 48">
+        <circle cx="24" cy="18" r="8" stroke="white" stroke-width="4" fill="none"/>
+        <rect x="12" y="30" width="24" height="10" rx="5" stroke="white" stroke-width="4" fill="none"/>
+      </svg>
+    </view>
+    <text>我的</text>
+  </view>
+</view> 

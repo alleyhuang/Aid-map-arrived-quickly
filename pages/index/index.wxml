@@ -1,0 +1,36 @@
+<!--index.wxml-->
+<navigation-bar title="应急地图" back="true" color="black" background="#FFF"></navigation-bar>
+<view class="desc">求助或帮助他人 寻找附近应急地点/设施</view>
+<view class="map-area">
+  <map
+    id="emergencyMap"
+    longitude="{{longitude}}"
+    latitude="{{latitude}}"
+    scale="16"
+    style="width: 100%; height: 500rpx; border-radius: 32rpx; overflow: hidden;"
+    markers="{{markers}}"
+    show-location
+  />
+</view>
+<view class="help-btn-wrapper">
+  <button class="help-btn" bindtap="onHelp">一键求助</button>
+</view>
+<view class="func-btns">
+  <button class="func-btn" bindtap="onShowHospitals">
+    <view class="func-btn-icon hospital"></view>
+    <text>展示附近医院</text>
+  </button>
+  <button class="func-btn" bindtap="onShowAEDs">
+    <view class="func-btn-icon aed"></view>
+    <text>展示附近AED设备</text>
+  </button>
+  <button class="func-btn" bindtap="onRegister">
+    <view class="func-btn-icon register"></view>
+    <text>注册成为</text>
+  </button>
+  <button class="func-btn" bindtap="onShowAEDs">
+    <view class="func-btn-icon aed"></view>
+    <text>展示附近AED设备</text>
+  </button>
+</view>
+<tabbar active="index" />
