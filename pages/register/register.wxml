@@ -1,0 +1,76 @@
+<view class="register-header">
+  <view class="register-title">注册</view>
+  <view class="register-subtitle">感谢您的注册，每一次注册都有可能创造一次奇迹</view>
+</view>
+<view class="register-scroll">
+  <view class="register-top-btns">
+    <view class="reg-type-btn {{regType === 'pro' ? 'active' : ''}}" bindtap="onSelectType" data-type="pro">
+      我具备专业技能
+    </view>
+    <view class="reg-type-btn {{regType === 'help' ? 'active' : ''}}" bindtap="onSelectType" data-type="help">
+      我能为他人提供帮助
+    </view>
+  </view>
+  <form bindsubmit="onSubmit">
+    <view class="form-section">
+      <view class="form-label">姓名 <text class="tip">（务必填写真实姓名，不会直接展示，仅后台备案）</text></view>
+      <input class="form-input" name="name" placeholder="请输入真实姓名" />
+    </view>
+    <view class="form-section">
+      <view class="form-label">电话 <text class="tip">（可用微信授权，不会直接展示号码，呼救时可联系）</text></view>
+      <input class="form-input" name="phone" placeholder="请输入手机号" />
+    </view>
+    <view class="form-section">
+      <view class="form-label">主要帮助地区</view>
+      <button class="location-btn" type="default" bindtap="onChooseLocation">选择地点</button>
+      <text class="location-tip">或选择随机</text>
+    </view>
+    <!-- 专属信息区 -->
+    <block wx:if="{{regType === 'pro'}}">
+      <view class="form-section">
+        <view class="form-label">选择您的专业范围</view>
+        <view class="tag-group">
+          <view class="tag {{selectedProType==index?'selected':''}}" wx:for="{{proTypes}}" wx:key="index" bindtap="onSelectProType" data-index="{{index}}" data-type="pro">{{item}}</view>
+        </view>
+        <input wx:if="{{showProOther}}" class="form-input" name="proOther" maxlength="15" placeholder="请输入自定义专业（15字内）" />
+      </view>
+      <view class="form-section">
+        <view class="form-label">上传您的专业资质</view>
+        <button class="upload-btn" bindtap="onUploadCert">上传图片/文档</button>
+      </view>
+    </block>
+    <block wx:if="{{regType === 'help'}}">
+      <view class="form-section">
+        <view class="form-label">选择您的帮助形式</view>
+        <view class="tag-group">
+          <view class="tag {{selectedHelpType==index?'selected':''}}" wx:for="{{helpTypes}}" wx:key="index" bindtap="onSelectHelpType" data-index="{{index}}" data-type="help">{{item}}</view>
+        </view>
+        <input wx:if="{{showHelpOther}}" class="form-input" name="helpOther" maxlength="15" placeholder="请输入自定义帮助（15字内）" />
+      </view>
+      <view class="form-section">
+        <view class="form-label">您具体能提供的帮助 <text class="tip">（如：汽车、摩托车等）</text></view>
+        <input class="form-input" name="helpDetail" placeholder="请输入具体内容" />
+      </view>
+    </block>
+    <view class="form-section">
+      <view class="form-label">帮助范围（0.5-20km）</view>
+      <slider class="slider" min="0.5" max="20" step="0.5" value="{{range}}" show-value name="range" activeColor="#00C37D" backgroundColor="#e5eefd" blockColor="#00C37D" />
+    </view>
+    <view class="form-section">
+      <view class="form-label">实时位置共享授权</view>
+      <switch checked="{{shareLocation}}" name="shareLocation" color="#00C37D" />
+      <text class="tip">（有用户呼救时才会展示）</text>
+    </view>
+    <view class="form-section agreement">
+      <checkbox-group>
+        <label>
+          <checkbox value="agree" checked="{{agree}}" color="#00C37D" />
+          我已阅读并同意<text class="link">服务协议</text>与<text class="link">隐私条款</text>
+        </label>
+      </checkbox-group>
+    </view>
+    <button class="submit-btn" formType="submit" disabled="{{!agree}}">提交注册</button>
+  </form>
+  <view style="height: 140rpx;"></view>
+</view>
+<tabbar active="register" /> 

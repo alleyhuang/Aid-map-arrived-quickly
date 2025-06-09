@@ -1,0 +1,26 @@
+<!--index.wxml-->
+<navigation-bar title="应急地图" back="true" color="black" background="#FFF"></navigation-bar>
+<view class="index-tabs">
+  <view class="index-tab {{poiType==='hospital'?'active':''}}" bindtap="onTabChange" data-type="hospital">展示附近医疗地点</view>
+  <view class="index-tab {{poiType==='aed'?'active':''}}" bindtap="onTabChange" data-type="aed">展示附近AED设备</view>
+  <view class="index-tab {{poiType==='shelter'?'active':''}}" bindtap="onTabChange" data-type="shelter">展示附近应急避难所</view>
+</view>
+<view class="pro-bar">
+  <view class="pro-bar-text">我有专业能力，可以帮助他人</view>
+  <button class="pro-bar-btn" bindtap="onRegister">立即注册</button>
+</view>
+<view class="map-area map-area-large">
+  <map
+    id="emergencyMap"
+    longitude="{{longitude}}"
+    latitude="{{latitude}}"
+    scale="16"
+    style="width: 100%; height: 70vh; border-radius: 32rpx; overflow: hidden;"
+    markers="{{markers}}"
+    show-location
+  />
+  <view class="help-btn-float">
+    <button class="help-btn" bindtap="onHelp">一键求助</button>
+  </view>
+</view>
+<tabbar active="index" />

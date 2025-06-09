@@ -1,0 +1,69 @@
+.tabbar {
+  width: 100vw;
+  height: 120rpx;
+  background: #00C37D;
+  box-shadow: 0 -2rpx 8rpx rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 100;
+}
+.tab-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.7);
+  font-size: 32rpx;
+  transition: color 0.2s;
+}
+.tab-item text {
+  font-size: 32rpx;
+  font-weight: 600;
+  margin-top: 2rpx;
+}
+.tab-item.active {
+  color: #fff;
+  font-weight: 700;
+  text-shadow: 0 2rpx 8rpx rgba(0,0,0,0.18), 0 0 8rpx #fff;
+}
+.tab-icon-svg {
+  width: 48rpx;
+  height: 48rpx;
+  margin-bottom: 4rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tab-item .tab-icon-svg svg path,
+.tab-item .tab-icon-svg svg rect,
+.tab-item .tab-icon-svg svg circle {
+  stroke: rgba(255,255,255,0.7);
+  transition: stroke 0.2s;
+}
+.tab-item.active .tab-icon-svg svg path,
+.tab-item.active .tab-icon-svg svg rect,
+.tab-item.active .tab-icon-svg svg circle {
+  stroke: #fff;
+  filter: drop-shadow(0 0 8rpx #fff);
+}
+.tab-center {
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.center-icon {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  background: #fff;
+  border: 4rpx solid #00C37D;
+  box-shadow: 0 2rpx 8rpx rgba(0,195,125,0.08);
+} 
