@@ -1,21 +1,48 @@
-.profile-header {
+/* 头部样式（与register页面一致） */
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
-  height: 240rpx;
+  z-index: 100;
   background: #00C37D;
+}
+
+.register-header {
+  width: 100vw;
+  height: 260rpx;
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   position: relative;
 }
-.profile-title {
+
+.register-title {
   color: #fff;
-  font-size: 40rpx;
-  font-weight: 600;
-  margin-bottom: 32rpx;
+  font-size: 44rpx;
+  font-weight: 700;
+  margin-bottom: 8rpx;
 }
+
+.register-subtitle {
+  color: #fff;
+  font-size: 26rpx;
+  margin-bottom: 0;
+  opacity: 0.9;
+}
+
+/* 滚动区域 */
+.main-scroll {
+  width: 100vw;
+  box-sizing: border-box;
+  background: #f5f6fa;
+}
+
+/* 个人信息卡片 */
 .profile-card {
   width: 90vw;
-  margin: -80rpx auto 32rpx auto;
+  margin: 32rpx auto;
   background: #fff;
   border-radius: 24rpx;
   box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.06);
@@ -24,6 +51,7 @@
   align-items: center;
   padding: 40rpx 0 32rpx 0;
 }
+
 .avatar {
   width: 120rpx;
   height: 120rpx;
@@ -34,11 +62,14 @@
   align-items: center;
   justify-content: center;
 }
+
 .nickname {
   font-size: 30rpx;
   color: #222;
   font-weight: 500;
 }
+
+/* 功能按钮区 */
 .profile-btns {
   width: 90vw;
   margin: 0 auto 32rpx auto;
@@ -51,12 +82,14 @@
   align-items: center;
   padding: 32rpx 0;
 }
+
 .profile-btn {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
+
 .icon-placeholder {
   width: 56rpx;
   height: 56rpx;
@@ -64,16 +97,21 @@
   background: #f2f2f2;
   margin-bottom: 8rpx;
 }
+
+/* 退出登录区域 */
 .logout-section {
   width: 90vw;
   margin: 0 auto;
+  padding-bottom: 120rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .logout-btn {
   width: 100%;
   height: 80rpx;
+  line-height: 80rpx;
   border-radius: 40rpx;
   border: 2rpx solid #bbb;
   background: #fff;
@@ -81,8 +119,8 @@
   font-size: 30rpx;
   margin: 32rpx 0 16rpx 0;
 }
+
 .version {
   color: #bbb;
   font-size: 26rpx;
-  margin-bottom: 32rpx;
 } 

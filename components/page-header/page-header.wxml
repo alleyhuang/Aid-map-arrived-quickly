@@ -1,0 +1,7 @@
+<view class="page-header" style="height:{{statusBarHeight + 180}}rpx;">
+  <view style="height:{{statusBarHeight}}rpx;"></view>
+  <view class="header-content">
+    <view class="header-title">{{title}}</view>
+    <view class="header-subtitle">{{subtitle}}</view>
+  </view>
+</view> 

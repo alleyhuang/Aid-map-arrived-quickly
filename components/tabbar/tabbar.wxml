@@ -1,23 +1,20 @@
 <view class="tabbar">
   <view class="tab-item {{active==='index'?'active':''}}" bindtap="onTab" data-page="index">
     <view class="tab-icon-svg">
-      <svg width="48" height="48" viewBox="0 0 48 48">
-        <path d="M8 22L24 10L40 22" stroke="white" stroke-width="4" fill="none"/>
-        <rect x="14" y="22" width="20" height="14" rx="2" stroke="white" stroke-width="4" fill="none"/>
-      </svg>
+      <image class="tabbar-icon" src="data:image/svg+xml;utf8,<svg width='48' height='48' xmlns='http://www.w3.org/2000/svg'><rect x='8' y='8' width='32' height='32' fill='%23e60012'/></svg>" />
     </view>
-    <text>首页</text>
+    <text class="tab-item-text">首页</text>
   </view>
-  <view class="tab-center">
-    <view class="center-icon"></view>
+  <view class="tab-item {{active==='chat'?'active':''}}" bindtap="onTab" data-page="chat">
+    <view class="tab-icon-svg">
+      <image class="tabbar-icon" src="data:image/svg+xml;utf8,<svg width='48' height='48' xmlns='http://www.w3.org/2000/svg'><circle cx='24' cy='24' r='16' fill='%2300C37D'/></svg>" />
+    </view>
+    <text class="tab-item-text">实时沟通</text>
   </view>
   <view class="tab-item {{active==='profile'?'active':''}}" bindtap="onTab" data-page="profile">
     <view class="tab-icon-svg">
-      <svg width="48" height="48" viewBox="0 0 48 48">
-        <circle cx="24" cy="18" r="8" stroke="white" stroke-width="4" fill="none"/>
-        <rect x="12" y="30" width="24" height="10" rx="5" stroke="white" stroke-width="4" fill="none"/>
-      </svg>
+      <image class="tabbar-icon" src="data:image/svg+xml;utf8,<svg width='48' height='48' xmlns='http://www.w3.org/2000/svg'><polygon points='24,8 29,20 42,20 32,28 36,40 24,32 12,40 16,28 6,20 19,20' fill='%23ff9900'/></svg>" />
     </view>
-    <text>我的</text>
+    <text class="tab-item-text">我的</text>
   </view>
 </view> 

@@ -1,0 +1,113 @@
+.chat-header-safe {
+  height: env(safe-area-inset-top, 44px);
+  width: 100vw;
+  background: #00C37D;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+.chat-header {
+  width: 100vw;
+  height: 260rpx;
+  background: #00C37D;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  padding-bottom: 32rpx;
+  margin-top: env(safe-area-inset-top, 44px);
+}
+.chat-title {
+  color: #fff;
+  font-size: 44rpx;
+  font-weight: 700;
+  margin-bottom: 12rpx;
+}
+.chat-subtitle {
+  color: #fff;
+  font-size: 26rpx;
+  opacity: 0.9;
+}
+.chat-scroll {
+  width: 100vw;
+  height: calc(100vh - 260rpx - env(safe-area-inset-top, 44px) - 180rpx);
+  padding-bottom: 180rpx;
+  background: #f7f8fa;
+}
+.forum-msg {
+  margin: 24rpx 24rpx 0 24rpx;
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.04);
+  padding: 24rpx;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+.forum-msg.user {
+  background: #fff3f3;
+  border: 2rpx solid #ffb3b3;
+}
+.forum-meta {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 22rpx;
+  color: #888;
+  margin-bottom: 8rpx;
+}
+.forum-identity {
+  margin-right: 16rpx;
+  color: #00C37D;
+}
+.forum-time {
+  color: #bbb;
+}
+.forum-content {
+  font-size: 30rpx;
+  color: #222;
+}
+.forum-input-bar {
+  position: fixed;
+  left: 0;
+  bottom: 120rpx;
+  width: 100vw;
+  background: #fff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 16rpx 24rpx;
+  box-shadow: 0 -2rpx 8rpx rgba(0,0,0,0.04);
+  z-index: 99;
+}
+.forum-input {
+  flex: 1;
+  height: 64rpx;
+  font-size: 28rpx;
+  border: 2rpx solid #eee;
+  border-radius: 12rpx;
+  padding: 0 16rpx;
+  margin-right: 16rpx;
+  background: #fafafa;
+}
+.forum-send-btn {
+  background: #00C37D;
+  color: #fff;
+  font-size: 28rpx;
+  border-radius: 12rpx;
+  padding: 0 32rpx;
+  height: 64rpx;
+  border: none;
+}
+.chat-announcement {
+  margin: 24rpx 24rpx 0 24rpx;
+  padding: 24rpx;
+  background: #fffbe6;
+  border-radius: 16rpx;
+  color: #b8860b;
+  font-size: 28rpx;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.04);
+} 

@@ -18,42 +18,125 @@ page {
   margin: 32rpx 0 16rpx 0;
   font-weight: 500;
 }
-.map-area {
-  width: 92vw;
-  margin: 0 auto;
+.index-tabs {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
+  margin: 24rpx 24rpx 0 24rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0,195,125,0.08);
+  overflow: hidden;
+}
+.index-tab {
+  flex: 1;
+  text-align: center;
+  font-size: 32rpx;
+  color: #00C37D;
+  padding: 28rpx 0;
+  font-weight: 500;
+  background: #fff;
+  transition: background 0.2s, color 0.2s;
+}
+.index-tab.active {
+  background: #00C37D;
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 4rpx 16rpx rgba(0,195,125,0.12);
+}
+.map-area-large {
+  width: 96vw;
+  margin: 24rpx auto 0 auto;
+  position: relative;
+  height: 70vh;
+  min-height: 600rpx;
+  max-height: 1200rpx;
   background: #d3d3d3;
-  height: 500rpx;
   border-radius: 32rpx;
   box-shadow: 0 8rpx 32rpx rgba(0,0,0,0.06);
   overflow: hidden;
 }
-.help-btn-wrapper {
+.help-btn-float {
+  position: fixed;
+  left: 0;
+  bottom: 180rpx;
+  width: 100vw;
   display: flex;
   justify-content: center;
-  margin-top: -80rpx;
-  margin-bottom: 32rpx;
+  z-index: 100;
 }
-.help-btn {
-  background: linear-gradient(135deg, #e60012 60%, #ff5a5f 100%);
-  color: #fff;
+.help-btn-outer {
+  width: 160rpx !important;
+  height: 160rpx !important;
   border-radius: 50%;
-  width: 180rpx;
-  height: 180rpx;
-  font-size: 48rpx;
-  font-weight: bold;
-  box-shadow: 0 8rpx 32rpx rgba(230,0,18,0.15);
-  border: none;
+  background: #fff;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.1);
   display: flex;
   align-items: center;
   justify-content: center;
-  letter-spacing: 2rpx;
-  transition: background 0.2s;
+  transition: transform 0.2s;
 }
-.help-btn:active {
-  background: linear-gradient(135deg, #c4000e 60%, #e60012 100%);
+.help-btn-outer.pressing {
+  transform: scale(0.95);
+}
+.help-btn {
+  width: 140rpx !important;
+  height: 140rpx !important;
+  background: #e60012 !important;
+  color: #fff !important;
+  font-size: 36rpx !important;
+  font-weight: bold !important;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.help-btn-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+.help-btn-progress {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: rgba(255,255,255,0.2);
+  transition: width 0.1s linear;
+}
+.help-btn-label {
+  margin-bottom: 12rpx;
+}
+.help-btn-progress-bar {
+  width: 140rpx;
+  height: 18rpx;
+  background: #fff3f3;
+  border-radius: 9rpx;
+  overflow: hidden;
+  margin: 0 auto 8rpx auto;
+  position: relative;
+}
+.help-btn-progress-inner {
+  height: 100%;
+  background: #00C37D;
+  border-radius: 9rpx;
+  transition: width 0.1s linear;
+}
+.help-btn-progress-text {
+  font-size: 22rpx;
+  color: #fff;
+  text-align: center;
+  margin-top: 2rpx;
+}
+.help-btn-outer.pressing .help-btn {
+  background: linear-gradient(135deg, #00C37D 60%, #00e6a0 100%);
 }
 .func-btns {
   display: flex;
@@ -97,4 +180,39 @@ page {
 }
 .func-btn-icon.register {
   background: #e5fbe5 url('/resources/register.png') center/60% no-repeat;
+}
+.pro-bar {
+  width: 92vw;
+  margin: 24rpx auto 0 auto;
+  background: #fff7e6;
+  border-radius: 24rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24rpx;
+  height: 88rpx;
+}
+.pro-bar-text {
+  font-size: 25rpx;
+  color: #e67c00;
+  font-weight: 600;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pro-bar-btn {
+  background: #00C37D;
+  color: #fff;
+  font-size: 25rpx;
+  font-weight: 600;
+  border-radius: 16rpx;
+  padding: 0 36rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  border: none;
+  margin-left: 24rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0,195,125,0.10);
 }

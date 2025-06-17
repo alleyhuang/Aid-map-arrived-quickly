@@ -1,3 +1,5 @@
+const app = getApp()
+
 Page({
   data: {
     regType: 'pro', // 'pro' or 'help'
@@ -9,7 +11,9 @@ Page({
     showHelpOther: false,
     range: 5,
     shareLocation: false,
-    agree: false
+    agree: false,
+    location: null,
+    statusBarHeight: 0
   },
   onSelectType(e) {
     const type = e.currentTarget.dataset.type;
@@ -36,7 +40,29 @@ Page({
   onChooseLocation() {
     wx.chooseLocation({
       success: (res) => {
-        wx.showToast({ title: '已选择: ' + res.name, icon: 'none' });
+        this.setData({
+          location: {
+            latitude: res.latitude,
+            longitude: res.longitude,
+            address: res.address
+          }
+        })
+        wx.showToast({ 
+          title: '已选择: ' + res.name, 
+          icon: 'none' 
+        })
+      }
+    });
+  },
+  onRequestLocationAuth() {
+    wx.authorize({
+      scope: 'scope.userLocation',
+      success: () => {
+        wx.showToast({ title: '授权成功', icon: 'success' });
+        this.onChooseLocation();
+      },
+      fail: () => {
+        wx.showToast({ title: '授权失败', icon: 'none' });
       }
     });
   },
@@ -49,12 +75,61 @@ Page({
       }
     });
   },
-  onSubmit(e) {
+  async onSubmit(e) {
     if (!this.data.agree) {
       wx.showToast({ title: '请同意协议', icon: 'none' });
       return;
     }
-    wx.showToast({ title: '注册成功', icon: 'success' });
-    // 这里可提交表单数据到后台
+
+    if (!this.data.location) {
+      wx.showToast({ title: '请选择位置', icon: 'none' });
+      return;
+    }
+
+    try {
+      const db = app.globalData.db;
+      const userData = {
+        _id: app.globalData.openid,
+        name: e.detail.value.name,
+        phone: e.detail.value.phone,
+        location: this.data.location,
+        helpRange: this.data.range,
+        helpType: this.data.regType === 'pro' ? 
+          this.data.proTypes[this.data.selectedProType] : 
+          this.data.helpTypes[this.data.selectedHelpType],
+        helpDetail: e.detail.value.helpDetail || '',
+        certificates: [], // 后续可添加上传功能
+        isProfessional: this.data.regType === 'pro',
+        status: '在线',
+        registerTime: new Date(),
+        lastActiveTime: new Date()
+      };
+
+      await db.collection('users').add({
+        data: userData
+      });
+
+      wx.showToast({ 
+        title: '注册成功', 
+        icon: 'success',
+        duration: 2000,
+        success: () => {
+          setTimeout(() => {
+            wx.navigateBack();
+          }, 2000);
+        }
+      });
+    } catch (error) {
+      console.error('注册失败：', error);
+      wx.showToast({ 
+        title: '注册失败，请重试', 
+        icon: 'error' 
+      });
+    }
+  },
+  onLoad() {
+    this.setData({
+      statusBarHeight: wx.getSystemInfoSync().statusBarHeight
+    });
   }
 }); 
