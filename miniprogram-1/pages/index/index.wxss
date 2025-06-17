@@ -1,0 +1,218 @@
+/**index.wxss**/
+page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f7f8fa;
+}
+.scrollarea {
+  flex: 1;
+  overflow-y: hidden;
+}
+
+/* 新增首页样式 */
+.desc {
+  text-align: center;
+  font-size: 32rpx;
+  color: #222;
+  margin: 32rpx 0 16rpx 0;
+  font-weight: 500;
+}
+.index-tabs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 24rpx 24rpx 0 24rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0,195,125,0.08);
+  overflow: hidden;
+}
+.index-tab {
+  flex: 1;
+  text-align: center;
+  font-size: 32rpx;
+  color: #00C37D;
+  padding: 28rpx 0;
+  font-weight: 500;
+  background: #fff;
+  transition: background 0.2s, color 0.2s;
+}
+.index-tab.active {
+  background: #00C37D;
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 4rpx 16rpx rgba(0,195,125,0.12);
+}
+.map-area-large {
+  width: 96vw;
+  margin: 24rpx auto 0 auto;
+  position: relative;
+  height: 70vh;
+  min-height: 600rpx;
+  max-height: 1200rpx;
+  background: #d3d3d3;
+  border-radius: 32rpx;
+  box-shadow: 0 8rpx 32rpx rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+.help-btn-float {
+  position: fixed;
+  left: 0;
+  bottom: 180rpx;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  z-index: 100;
+}
+.help-btn-outer {
+  width: 160rpx !important;
+  height: 160rpx !important;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+.help-btn-outer.pressing {
+  transform: scale(0.95);
+}
+.help-btn {
+  width: 140rpx !important;
+  height: 140rpx !important;
+  background: #e60012 !important;
+  color: #fff !important;
+  font-size: 36rpx !important;
+  font-weight: bold !important;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.help-btn-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+.help-btn-progress {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: rgba(255,255,255,0.2);
+  transition: width 0.1s linear;
+}
+.help-btn-label {
+  margin-bottom: 12rpx;
+}
+.help-btn-progress-bar {
+  width: 140rpx;
+  height: 18rpx;
+  background: #fff3f3;
+  border-radius: 9rpx;
+  overflow: hidden;
+  margin: 0 auto 8rpx auto;
+  position: relative;
+}
+.help-btn-progress-inner {
+  height: 100%;
+  background: #00C37D;
+  border-radius: 9rpx;
+  transition: width 0.1s linear;
+}
+.help-btn-progress-text {
+  font-size: 22rpx;
+  color: #fff;
+  text-align: center;
+  margin-top: 2rpx;
+}
+.help-btn-outer.pressing .help-btn {
+  background: linear-gradient(135deg, #00C37D 60%, #00e6a0 100%);
+}
+.func-btns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0 32rpx;
+  gap: 32rpx 0;
+  margin-top: 16rpx;
+}
+.func-btn {
+  width: 48%;
+  height: 120rpx;
+  background: #fff;
+  color: #222;
+  font-size: 36rpx;
+  border-radius: 24rpx;
+  margin-bottom: 24rpx;
+  border: none;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.func-btn-icon {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 16rpx;
+  margin-bottom: 8rpx;
+  background: #e5eefd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.func-btn-icon.hospital {
+  background: #e5eefd url('/resources/hospital.png') center/60% no-repeat;
+}
+.func-btn-icon.aed {
+  background: #fbeee5 url('/resources/aed.png') center/60% no-repeat;
+}
+.func-btn-icon.register {
+  background: #e5fbe5 url('/resources/register.png') center/60% no-repeat;
+}
+.pro-bar {
+  width: 92vw;
+  margin: 24rpx auto 0 auto;
+  background: #fff7e6;
+  border-radius: 24rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24rpx;
+  height: 88rpx;
+}
+.pro-bar-text {
+  font-size: 25rpx;
+  color: #e67c00;
+  font-weight: 600;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pro-bar-btn {
+  background: #00C37D;
+  color: #fff;
+  font-size: 25rpx;
+  font-weight: 600;
+  border-radius: 16rpx;
+  padding: 0 36rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  border: none;
+  margin-left: 24rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0,195,125,0.10);
+}

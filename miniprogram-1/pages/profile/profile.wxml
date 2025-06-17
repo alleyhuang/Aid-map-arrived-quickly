@@ -1,0 +1,26 @@
+<view class="profile-header">
+  <view class="profile-title">个人中心</view>
+</view>
+<view class="profile-card">
+  <view class="avatar"></view>
+  <view class="nickname">微信用户#18006202552</view>
+</view>
+<view class="profile-btns">
+  <view class="profile-btn">
+    <view class="icon-placeholder"></view>
+    <text>急救消息</text>
+  </view>
+  <view class="profile-btn">
+    <view class="icon-placeholder"></view>
+    <text>免责声明</text>
+  </view>
+  <view class="profile-btn">
+    <view class="icon-placeholder"></view>
+    <text>我的档案</text>
+  </view>
+</view>
+<view class="logout-section">
+  <button class="logout-btn">退出登录</button>
+  <view class="version">V1.4.51</view>
+</view>
+<tabbar active="profile" /> 

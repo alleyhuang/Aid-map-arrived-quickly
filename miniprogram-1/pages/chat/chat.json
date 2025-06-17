@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "图援速达",
+  "usingComponents": {
+    "tabbar": "/components/tabbar/tabbar"
+  }
+} 

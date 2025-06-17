@@ -1,0 +1,271 @@
+<view class="container">
+  <view class="help-header">
+    <view class="help-title">发布求助</view>
+    <view class="help-subtitle">您的每一次求助，都将得到及时的响应</view>
+  </view>
+
+  <scroll-view scroll-y class="help-scroll">
+    <!-- 紧急程度选择 -->
+    <view class="form-section">
+      <view class="form-label">紧急程度</view>
+      <view class="urgency-levels">
+        <view 
+          wx:for="{{urgencyLevels}}" 
+          wx:key="value"
+          class="urgency-btn {{formData.urgency === item.value ? 'active' : ''}}"
+          style="{{formData.urgency === item.value ? 'background: ' + item.color + '; color: #fff;' : ''}}"
+          data-value="{{item.value}}"
+          bind:tap="onUrgencyChange"
+        >
+          {{item.label}}
+        </view>
+      </view>
+    </view>
+
+    <!-- 联系方式 -->
+    <view class="form-section">
+      <view class="form-label">联系方式 <text class="tip">（不会直接展示，仅用于紧急联系）</text></view>
+      <input 
+        type="number" 
+        placeholder="请输入手机号码" 
+        value="{{formData.phone}}"
+        data-field="phone"
+        bindinput="onInput"
+        class="form-input {{formStatus.phoneValid ? 'valid' : formData.phone ? 'invalid' : ''}}"
+      />
+    </view>
+
+    <!-- 紧急联系人（仅特急时显示） -->
+    <view class="form-section" wx:if="{{formData.urgency === 'emergency'}}">
+      <view class="form-label">紧急联系人 <text class="tip">（特急情况下必填）</text></view>
+      <input 
+        type="text" 
+        placeholder="请输入联系人姓名" 
+        value="{{formData.contactName}}"
+        data-field="contactName"
+        bindinput="onInput"
+        class="form-input"
+      />
+      <input 
+        type="text" 
+        placeholder="请输入与联系人关系" 
+        value="{{formData.contactRelation}}"
+        data-field="contactRelation"
+        bindinput="onInput"
+        class="form-input"
+      />
+    </view>
+
+    <!-- 帮助类型选择 -->
+    <view class="form-section">
+      <view class="form-label">帮助类型</view>
+      <view class="help-types">
+        <view 
+          wx:for="{{helpTypes}}" 
+          wx:key="index"
+          class="help-type-btn {{selectedTypes.includes(+index) ? 'active' : ''}}"
+          style="{{selectedTypes.includes(+index) ? 'background: #00C37D; color: #fff; border-color: #00C37D;' : ''}}"
+          bind:tap="onSelectType"
+          data-index="{{index}}"
+        >
+          {{item}}
+        </view>
+      </view>
+      <input 
+        wx:if="{{showOther}}" 
+        class="form-input" 
+        placeholder="请输入具体需求（15字内）" 
+        maxlength="15"
+        value="{{formData.otherType}}"
+        data-field="otherType"
+        bindinput="onInput"
+      />
+    </view>
+
+    <!-- 情况描述 -->
+    <view class="form-section">
+      <view class="form-label">情况描述 <text class="tip">（请详细描述，以便志愿者更好地提供帮助）</text></view>
+      <textarea 
+        placeholder="请详细描述您的情况..." 
+        value="{{formData.desc}}"
+        data-field="desc"
+        bindinput="onInput"
+        maxlength="500"
+        class="form-textarea"
+      />
+    </view>
+
+    <!-- 图片上传 -->
+    <view class="form-section">
+      <view class="form-label">上传图片 <text class="tip">（选填，最多3张）</text></view>
+      <view class="image-uploader">
+        <view class="image-list">
+          <view 
+            wx:for="{{formData.images}}" 
+            wx:key="*this" 
+            class="image-item"
+          >
+            <image 
+              src="{{item}}" 
+              mode="aspectFill" 
+              bind:tap="onPreviewImage"
+              data-url="{{item}}"
+            />
+            <view 
+              class="delete-btn"
+              catch:tap="onDeleteImage"
+              data-index="{{index}}"
+            >×</view>
+          </view>
+          <view 
+            class="upload-btn" 
+            bind:tap="onChooseImage" 
+            wx:if="{{formData.images.length < 3}}"
+          >
+            <text class="upload-icon">+</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 位置信息 -->
+    <view class="form-section">
+      <view class="form-label">求助位置</view>
+      <view class="location-row">
+        <button class="location-btn" type="default" bindtap="onRequestLocationAuth">选择位置</button>
+        <text class="location-tip">或使用当前位置</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 底部按钮 -->
+  <view class="footer">
+    <button 
+      class="submit-btn {{formStatus.canSubmit ? '' : 'disabled'}}"
+      bind:tap="showHelpPreview"
+      disabled="{{!formStatus.canSubmit}}"
+    >
+      预览并发布
+    </button>
+  </view>
+
+  <!-- 预览弹窗 -->
+  <view class="preview-modal {{showPreview ? 'show' : ''}}" wx:if="{{showPreview}}">
+    <view class="preview-mask" bind:tap="onCancelPreview"></view>
+    <view class="preview-content">
+      <view class="preview-header">
+        <text class="preview-title">确认求助信息</text>
+        <view class="close-btn" bind:tap="onCancelPreview">×</view>
+      </view>
+      
+      <scroll-view scroll-y class="preview-scroll">
+        <view class="preview-item">
+          <text class="preview-label">紧急程度：</text>
+          <text class="preview-value" style="color: {{previewData.urgencyColor}}">
+            {{previewData.urgencyLabel}}
+          </text>
+        </view>
+        
+        <view class="preview-item">
+          <text class="preview-label">联系电话：</text>
+          <text class="preview-value">{{formData.phone}}</text>
+        </view>
+        
+        <view class="preview-item" wx:if="{{formData.urgency === 'emergency'}}">
+          <text class="preview-label">紧急联系人：</text>
+          <text class="preview-value">{{formData.contactName}}（{{formData.contactRelation}}）</text>
+        </view>
+        
+        <view class="preview-item">
+          <text class="preview-label">帮助类型：</text>
+          <view class="preview-types">
+            <text 
+              wx:for="{{selectedTypes}}" 
+              wx:key="*this"
+              class="preview-type-tag"
+            >
+              {{helpTypes[item]}}
+            </text>
+          </view>
+        </view>
+        
+        <view class="preview-item" wx:if="{{showOther}}">
+          <text class="preview-label">其他需求：</text>
+          <text class="preview-value">{{formData.otherType}}</text>
+        </view>
+        
+        <view class="preview-item">
+          <text class="preview-label">情况描述：</text>
+          <text class="preview-value">{{formData.desc || '无'}}</text>
+        </view>
+        
+        <view class="preview-item" wx:if="{{formData.images.length > 0}}">
+          <text class="preview-label">上传图片：</text>
+          <view class="preview-images">
+            <image 
+              wx:for="{{formData.images}}" 
+              wx:key="*this"
+              src="{{item}}"
+              mode="aspectFill"
+              bind:tap="onPreviewImage"
+              data-url="{{item}}"
+            />
+          </view>
+        </view>
+      </scroll-view>
+      
+      <view class="preview-footer">
+        <button 
+          class="cancel-btn" 
+          bind:tap="onCancelPreview"
+        >返回修改</button>
+        <button 
+          class="confirm-btn {{submitting ? 'disabled' : ''}}"
+          bind:tap="onSubmit"
+          disabled="{{submitting}}"
+        >
+          {{submitting ? '发布中...' : '确认发布'}}
+        </button>
+      </view>
+    </view>
+  </view>
+</view>
+
+<tabbar active="help" /> 
+
+<style>
+/* 帮助类型选择样式 */
+.tag-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-top: 8rpx;
+}
+
+.tag {
+  background: #f5f6fa;
+  color: #00C37D;
+  border-radius: 12rpx;
+  padding: 12rpx 32rpx;
+  font-size: 26rpx;
+  border: 2rpx solid #e5eefd;
+  margin-bottom: 8rpx;
+  transition: background 0.2s, color 0.2s;
+}
+
+.tag.selected {
+  background: #00C37D;
+  color: #fff;
+  border: 2rpx solid #00C37D;
+}
+
+.form-input {
+  width: 100%;
+  height: 64rpx;
+  font-size: 28rpx;
+  border: none;
+  border-bottom: 2rpx solid #eee;
+  margin-top: 8rpx;
+  background: transparent;
+}
+</style> 

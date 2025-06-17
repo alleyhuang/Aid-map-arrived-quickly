@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "求助信息填写",
+  "usingComponents": {
+    "tabbar": "/components/tabbar/tabbar"
+  }
+} 
