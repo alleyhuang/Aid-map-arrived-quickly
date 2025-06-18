@@ -2,7 +2,6 @@ const app = getApp()
 
 Page({
   data: {
-    regType: 'pro', // 'pro' or 'help'
     proTypes: ['医疗急救类', '消防救援类', '工程技术类', '灾害应对类', '心理援助类', '其他'],
     helpTypes: ['交通运输类', '物资供给类', '其他'],
     selectedProType: 0,
@@ -13,12 +12,23 @@ Page({
     shareLocation: false,
     agree: false,
     location: null,
-    statusBarHeight: 0
+    statusBarHeight: 0,
+    regType: 'helper'
   },
+
+  onLoad() {
+    this.setData({
+      statusBarHeight: wx.getSystemInfoSync().statusBarHeight
+    });
+  },
+
   onSelectType(e) {
     const type = e.currentTarget.dataset.type;
-    this.setData({ regType: type });
+    this.setData({
+      regType: type
+    });
   },
+
   onSelectProType(e) {
     const idx = e.currentTarget.dataset.index;
     this.setData({ selectedProType: idx });
@@ -28,6 +38,7 @@ Page({
       this.setData({ showProOther: false });
     }
   },
+
   onSelectHelpType(e) {
     const idx = e.currentTarget.dataset.index;
     this.setData({ selectedHelpType: idx });
@@ -37,6 +48,7 @@ Page({
       this.setData({ showHelpOther: false });
     }
   },
+
   onChooseLocation() {
     wx.chooseLocation({
       success: (res) => {
@@ -54,6 +66,7 @@ Page({
       }
     });
   },
+
   onRequestLocationAuth() {
     wx.authorize({
       scope: 'scope.userLocation',
@@ -66,6 +79,7 @@ Page({
       }
     });
   },
+
   onUploadCert() {
     wx.chooseMessageFile({
       count: 1,
@@ -75,6 +89,7 @@ Page({
       }
     });
   },
+
   async onSubmit(e) {
     if (!this.data.agree) {
       wx.showToast({ title: '请同意协议', icon: 'none' });
@@ -88,25 +103,23 @@ Page({
 
     try {
       const db = app.globalData.db;
-      const userData = {
-        _id: app.globalData.openid,
-        name: e.detail.value.name,
-        phone: e.detail.value.phone,
-        location: this.data.location,
+      const helperInfo = {
+        isHelper: true,
         helpRange: this.data.range,
-        helpType: this.data.regType === 'pro' ? 
-          this.data.proTypes[this.data.selectedProType] : 
-          this.data.helpTypes[this.data.selectedHelpType],
+        helpType: this.data.proTypes[this.data.selectedProType],
         helpDetail: e.detail.value.helpDetail || '',
         certificates: [], // 后续可添加上传功能
-        isProfessional: this.data.regType === 'pro',
-        status: '在线',
-        registerTime: new Date(),
-        lastActiveTime: new Date()
+        registerTime: new Date()
       };
 
-      await db.collection('users').add({
-        data: userData
+      // 更新用户信息，添加帮助者信息
+      await db.collection('users').doc(app.globalData.openid).update({
+        data: {
+          phone: e.detail.value.phone,
+          location: this.data.location,
+          helperInfo: helperInfo,
+          lastActiveTime: new Date()
+        }
       });
 
       wx.showToast({ 
@@ -126,10 +139,5 @@ Page({
         icon: 'error' 
       });
     }
-  },
-  onLoad() {
-    this.setData({
-      statusBarHeight: wx.getSystemInfoSync().statusBarHeight
-    });
   }
 }); 

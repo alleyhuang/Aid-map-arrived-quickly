@@ -402,46 +402,66 @@ Page({
 
   // 提交表单
   async onSubmit() {
-    if (this.data.submitting) return;
-
-    if (wx.vibrateShort) {
-      wx.vibrateShort();
-    }
-
-    this.setData({ submitting: true });
+    if (this.data.isSubmitting) return;
+    this.setData({ isSubmitting: true });
 
     try {
       const db = app.globalData.db;
-      const helpData = {
-        ...this.data.formData,
-        _openid: app.globalData.openid,
-        status: 'pending',
-        createTime: db.serverDate(),
-        updateTime: db.serverDate()
+      
+      // 构建求助请求数据
+      const helpRequestData = {
+        userId: app.globalData.openid,
+        urgency: this.data.formData.urgency,
+        phone: this.data.formData.phone,
+        contactName: this.data.formData.contactName,
+        contactRelation: this.data.formData.contactRelation,
+        helpTypes: this.data.formData.helpTypes,
+        otherType: this.data.formData.otherType,
+        desc: this.data.formData.desc,
+        images: this.data.formData.images,
+        location: this.data.formData.location,
+        status: '待救援',
+        createTime: new Date(),
+        updateTime: new Date()
       };
 
-      await db.collection('help_requests').add({
-        data: helpData
+      // 添加求助请求
+      const result = await db.collection('help_requests').add({
+        data: helpRequestData
+      });
+
+      // 添加一条系统消息
+      await db.collection('messages').add({
+        data: {
+          helpRequestId: result._id,
+          senderId: 'system',
+          content: `新的求助请求已创建：${helpRequestData.desc}`,
+          type: 'system',
+          status: '正常',
+          createTime: new Date()
+        }
       });
 
       wx.showToast({
-        title: '发布成功',
+        title: '提交成功',
         icon: 'success',
         duration: 2000,
         success: () => {
           setTimeout(() => {
-            wx.navigateBack();
+            wx.navigateTo({
+              url: `/pages/chat/chat?helpRequestId=${result._id}&type=${helpRequestData.helpTypes.join(',')}&desc=${helpRequestData.desc}`
+            });
           }, 2000);
         }
       });
     } catch (error) {
-      console.error('发布失败：', error);
+      console.error('提交失败：', error);
       wx.showToast({
-        title: '发布失败，请重试',
+        title: '提交失败，请重试',
         icon: 'error'
       });
     } finally {
-      this.setData({ submitting: false });
+      this.setData({ isSubmitting: false });
     }
   }
 }) 

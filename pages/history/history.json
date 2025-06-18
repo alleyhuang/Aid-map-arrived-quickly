@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "对话历史",
+  "usingComponents": {
+    "page-header": "/components/page-header/page-header",
+    "tabbar": "/components/tabbar/tabbar"
+  }
+} 

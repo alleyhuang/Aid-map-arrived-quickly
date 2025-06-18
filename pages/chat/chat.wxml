@@ -1,28 +1,39 @@
-<view class="chat-header-safe"></view>
-<view class="chat-header">
-  <view class="chat-title">图援速达</view>
-  <view class="chat-subtitle">在此处可以对求助case进行实时讨论</view>
-</view>
-
-<scroll-view scroll-y="true" class="chat-scroll">
-  <view class="chat-announcement">
-    <text>{{announcement}}</text>
-  </view>
+<view class="page">
+  <!-- 通用 header -->
+  <page-header 
+    title="图援速达" 
+    subtitle="在此处可以对求助case进行实时讨论"
+  />
   
-  <block wx:for="{{messages}}" wx:key="index">
-    <view class="forum-msg {{item.role}}">
-      <view class="forum-meta">
-        <text class="forum-identity">{{item.role==='user'?'求助者':'帮助人-'+item.type}}</text>
-        <text class="forum-time">{{item.time}}</text>
+  <scroll-view 
+    scroll-y 
+    class="page-content"
+    style="height: 100vh; padding-top: {{statusBarHeight + 180}}rpx;"
+  >
+    <view class="content-inner">
+      <view class="chat-announcement">
+        <text>{{announcement}}</text>
       </view>
-      <view class="forum-content">{{item.content}}</view>
+      
+      <block wx:for="{{messages}}" wx:key="index">
+        <view class="forum-msg {{item.role}}">
+          <view class="forum-meta">
+            <text class="forum-identity">{{item.role==='user'?'求助者':'帮助人-'+item.type}}</text>
+            <text class="forum-time">{{item.time}}</text>
+          </view>
+          <view class="forum-content">{{item.content}}</view>
+        </view>
+      </block>
+
+      <view class="forum-input-bar">
+        <input class="forum-input" placeholder="请输入内容..." value="{{inputValue}}" bindinput="onInput" />
+        <button class="forum-send-btn" bindtap="onSend">发送</button>
+      </view>
+      
+      <!-- 底部占位，确保内容不被 tabbar 遮挡 -->
+      <view style="height: 120rpx;"></view>
     </view>
-  </block>
-</scroll-view>
+  </scroll-view>
 
-<view class="forum-input-bar">
-  <input class="forum-input" placeholder="请输入内容..." value="{{inputValue}}" bindinput="onInput" />
-  <button class="forum-send-btn" bindtap="onSend">发送</button>
-</view>
-
-<tabbar active="chat" /> 
+  <tabbar active="chat" />
+</view> 

@@ -5,16 +5,16 @@ Page({
      * 页面的初始数据
      */
     data: {
-        statusBarHeightRpx: 0
+        statusBarHeight: 0
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-        const systemInfo = wx.getSystemInfoSync();
+        const windowInfo = wx.getWindowInfo();
         this.setData({
-            statusBarHeightRpx: systemInfo.statusBarHeight * 2
+            statusBarHeight: windowInfo.statusBarHeight
         });
     },
 
@@ -65,5 +65,23 @@ Page({
      */
     onShareAppMessage() {
 
+    },
+
+    onTapEmergency() {
+        wx.navigateTo({
+            url: '/pages/history/history'
+        });
+    },
+
+    onTapDisclaimer() {
+        // 待实现
+    },
+
+    onTapMyHelp() {
+        // 待实现
+    },
+
+    onLogout() {
+        // 待实现
     }
 })

@@ -1,38 +1,50 @@
-<!-- 顶部绿色header，固定不动 -->
-<view class="fixed-header" style="height:{{statusBarHeightRpx + 260}}rpx;">
-  <view style="height:{{statusBarHeightRpx}}rpx;"></view>
-  <view class="register-header">
-    <view class="register-title">个人中心</view>
-    <view class="register-subtitle">您的每一次帮助，都将被记录在此</view>
-  </view>
-</view>
+<view class="page">
+  <!-- 通用 header -->
+  <page-header 
+    title="个人中心" 
+    subtitle="您的每一次帮助，都将被记录在此"
+  />
+  
+  <scroll-view 
+    scroll-y 
+    class="page-content"
+    style="height: 100vh; padding-top: {{statusBarHeight + 180}}rpx;"
+  >
+    <view class="content-inner">
+      <view class="profile-card">
+        <view class="avatar">
+          <open-data type="userAvatarUrl"></open-data>
+        </view>
+        <view class="nickname">
+          <open-data type="userNickName"></open-data>
+        </view>
+      </view>
 
-<!-- 内容区，padding-top避开header -->
-<scroll-view scroll-y class="main-scroll" style="height:calc(100vh - {{statusBarHeightRpx + 260}}rpx); padding-top:{{statusBarHeightRpx + 260}}rpx;">
-  <view class="profile-card">
-    <view class="avatar"></view>
-    <view class="nickname">微信用户#18006202552</view>
-  </view>
+      <view class="profile-btns">
+        <button class="profile-btn" bindtap="onTapEmergency">
+          <image class="profile-btn-icon" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMzIiIGN5PSIzMiIgcj0iMjQiIGZpbGw9IiMwMEMzN0QiLz48L3N2Zz4=" mode="aspectFill" />
+          <text>急救消息</text>
+        </button>
+        <button class="profile-btn" bindtap="onTapDisclaimer">
+          <image class="profile-btn-icon" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3QgeD0iMjAiIHk9IjE2IiB3aWR0aD0iMjQiIGhlaWdodD0iMzIiIGZpbGw9IiMwMEMzN0QiLz48L3N2Zz4=" mode="aspectFill" />
+          <text>免责声明</text>
+        </button>
+        <button class="profile-btn" bindtap="onTapMyHelp">
+          <image class="profile-btn-icon" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBvbHlnb24gcG9pbnRzPSIzMiwxNiA0MCwyOCA1MiwyOCA0NCwzNiA0OCw0OCAzMiw0MCAyNCw0MCAyOCwzNiAyMCwyOCAzMiwyOCIgZmlsbD0iIzAwQzM3RCIvPjwvc3ZnPg==" mode="aspectFill" />
+          <text>我的档案</text>
+        </button>
+      </view>
 
-  <view class="profile-btns">
-    <view class="profile-btn">
-      <view class="icon-placeholder"></view>
-      <text>急救消息</text>
+      <view class="logout-section">
+        <button class="logout-btn" bindtap="onLogout">退出登录</button>
+        <text class="version">V1.4.51</text>
+      </view>
+      
+      <!-- 底部占位，确保内容不被 tabbar 遮挡 -->
+      <view style="height: 120rpx;"></view>
     </view>
-    <view class="profile-btn">
-      <view class="icon-placeholder"></view>
-      <text>免责声明</text>
-    </view>
-    <view class="profile-btn">
-      <view class="icon-placeholder"></view>
-      <text>我的档案</text>
-    </view>
-  </view>
+  </scroll-view>
 
-  <view class="logout-section">
-    <button class="logout-btn">退出登录</button>
-    <view class="version">V1.4.51</view>
-  </view>
-</scroll-view>
-
-<tabbar active="profile" /> 
+  <!-- 通用 tabbar -->
+  <tabbar active="profile" />
+</view> 

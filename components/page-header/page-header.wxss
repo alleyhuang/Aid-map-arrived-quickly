@@ -1,30 +1,30 @@
 .page-header {
+  width: 100%;
+  background: #07c160;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
   z-index: 100;
-  background: #00C37D;
+  box-sizing: border-box;
+  padding: 0 32rpx;
 }
 
 .header-content {
-  width: 100vw;
-  height: 180rpx;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  height: 180rpx;
 }
 
 .header-title {
+  font-size: 40rpx;
   color: #fff;
-  font-size: 44rpx;
-  font-weight: 700;
-  margin-bottom: 4rpx;
+  font-weight: 500;
+  margin-bottom: 8rpx;
 }
 
 .header-subtitle {
-  color: #fff;
-  font-size: 26rpx;
-  opacity: 0.9;
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.8);
 } 

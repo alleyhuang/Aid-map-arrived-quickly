@@ -1,14 +1,22 @@
 {
-    "libVersion": "3.8.3",
-    "projectname": "miniprogram-1",
-    "setting": {
-        "urlCheck": true,
-        "coverView": true,
-        "lazyloadPlaceholderEnable": false,
-        "skylineRenderEnable": true,
-        "preloadBackgroundData": false,
-        "autoAudits": false,
-        "showShadowRootInWxmlPanel": true,
-        "compileHotReLoad": true
-    }
+  "libVersion": "3.8.3",
+  "projectname": "%E6%8F%B4%E5%9B%BE%E9%80%9F%E8%BE%BE",
+  "setting": {
+    "urlCheck": true,
+    "coverView": true,
+    "lazyloadPlaceholderEnable": false,
+    "skylineRenderEnable": true,
+    "preloadBackgroundData": false,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "compileHotReLoad": true,
+    "useApiHook": true,
+    "useApiHostProcess": true,
+    "useStaticServer": false,
+    "useLanDebug": false,
+    "showES6CompileOption": false,
+    "checkInvalidKey": true,
+    "ignoreDevUnusedFiles": true,
+    "bigPackageSizeSupport": false
+  }
 }
