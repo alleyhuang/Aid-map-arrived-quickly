@@ -11,6 +11,8 @@
   left: 0;
   bottom: 0;
   z-index: 100;
+  padding-bottom: env(safe-area-inset-bottom);
+
 }
 .tab-item {
   flex: 1;

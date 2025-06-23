@@ -60,15 +60,15 @@ page {
 .help-btn-float {
   position: fixed;
   left: 0;
-  bottom: 180rpx;
+  bottom: 210rpx;
   width: 100vw;
   display: flex;
   justify-content: center;
   z-index: 100;
 }
 .help-btn-outer {
-  width: 160rpx !important;
-  height: 160rpx !important;
+  width: 170rpx !important;
+  height: 170rpx !important;
   border-radius: 50%;
   background: #fff;
   box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.1);
@@ -81,8 +81,8 @@ page {
   transform: scale(0.95);
 }
 .help-btn {
-  width: 140rpx !important;
-  height: 140rpx !important;
+  width: 150rpx !important;
+  height: 150rpx !important;
   background: #e60012 !important;
   color: #fff !important;
   font-size: 36rpx !important;
