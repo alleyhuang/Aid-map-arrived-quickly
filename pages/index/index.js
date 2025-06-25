@@ -115,6 +115,13 @@ Page({
     });
   },
 
+  onMarkerTap(e) {
+    const eventData = JSON.stringify(e);
+    wx.navigateTo({
+      url: `/pages/help-history/index?eventData=${encodeURIComponent(eventData)}`
+    });
+  },
+
   setMarkers(type) {
     const lat = this.data.latitude;
     const lng = this.data.longitude;

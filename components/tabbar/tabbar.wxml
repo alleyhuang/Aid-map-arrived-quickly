@@ -9,7 +9,7 @@
     <view class="tab-icon-svg">
       <image class="tabbar-icon" src="data:image/svg+xml;utf8,<svg width='48' height='48' xmlns='http://www.w3.org/2000/svg'><circle cx='24' cy='24' r='16' fill='%2300C37D'/></svg>" />
     </view>
-    <text class="tab-item-text">实时沟通</text>
+    <text class="tab-item-text">所有事件</text>
   </view>
   <view class="tab-item {{active==='profile'?'active':''}}" bindtap="onTab" data-page="profile">
     <view class="tab-icon-svg">

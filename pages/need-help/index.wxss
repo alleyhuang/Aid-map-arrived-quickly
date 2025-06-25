@@ -1,0 +1,32 @@
+.container {
+  position: relative;
+  overflow: hidden;
+  padding: 20rpx;
+}
+
+.top {
+  width: 100%;
+}
+
+.app-name {
+  font-size: 48rpx;
+  font-weight: 400;
+}
+
+.sub-name {
+  font-size: 24rpx;
+  font-weight: 400;
+  color: #6C7B8E;
+}
+
+.title {
+  height: 110rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20rpx;
+  color: #00CB90;
+  border: 1rpx solid #EBEBEB;
+  border-radius: 16rpx;
+  width: 100%;
+}

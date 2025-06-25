@@ -4,7 +4,9 @@
     "pages/register/register",
     "pages/profile/profile",
     "pages/help/help",
-    "pages/chat/chat"
+    "pages/chat/chat",
+    "pages/need-help/index",
+    "pages/help-history/index"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
@@ -22,7 +24,5 @@
       "desc": "用于获取您的地理位置，以便为您推荐附近的应急服务和设施"
     }
   },
-  "requiredPrivateInfos": [ 
-    "getLocation"
-  ]
+  "requiredPrivateInfos": ["getLocation"]
 }

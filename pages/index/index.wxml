@@ -33,6 +33,7 @@
     style="width: 100%; height: 70vh; border-radius: 32rpx; overflow: hidden;"
     markers="{{markers}}"
     show-location
+    bindmarkertap="onMarkerTap"
   />
   <view class="help-btn-float">
     <view

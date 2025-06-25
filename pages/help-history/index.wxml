@@ -1,0 +1,16 @@
+<view class="container">
+  <view class="top">
+    <view class="app-name">援图速达</view>
+    <view class="sub-name">在此处可以查看求助事件的具体信息</view>
+  </view>
+  <view class="title">历史事件页</view>
+  <view class="info">
+    <view wx:for="{{3}}" wx:key="*this" class="item">
+      <view class="txt">事件 id: 10001</view>
+      <view class="txt">发布时间: 2025 年 06 月 26 日</view>
+      <view class="txt">帮助类型: 医疗急救类</view>
+      <view class="txt">求助位置: 北京</view>
+    </view>
+    <view>获取历史帮助信息： {{ info }}</view>
+  </view>
+</view>

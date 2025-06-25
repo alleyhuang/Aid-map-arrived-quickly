@@ -1,0 +1,16 @@
+<view class="container">
+  <view class="top">
+    <view class="app-name">援图速达</view>
+    <view class="sub-name">在此处可以查看求助事件的具体信息</view>
+  </view>
+  <view class="title">事件信息</view>
+  <view class="info">
+    <view
+      wx:for="{{['第一部分', '第二部分', '第三部分', '第四部分', '第五部分']}}"
+      wx:key="*this"
+      class="{{index === 0 ? 'one' : ''}}"
+      >{{item}}</view
+    >
+    <view style="margin-top: 30rpx;">获取的信息： {{ info }}</view>
+  </view>
+</view>
