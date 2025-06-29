@@ -5,38 +5,57 @@ Page({
    */
   data: {
     info: {},
+    eventList: [],
+    isPress: -1,
   },
 
-  onLoad(options) {
-    const eventData = JSON.parse(decodeURIComponent(options.eventData));
-    console.log("Received event data:", eventData);
-
+  onLoad() {
+    wx.showLoading({
+      title: "加载中",
+    });
     // 获取用户上传数据
-    this.getHelpHistory(options);
+    this.getHelpHistory();
   },
 
-  getHelpHistory(options) {
-    console.log("获取用户上传信息");
-
+  getHelpHistory() {
     wx.cloud.callFunction({
       name: "login",
       data: {
-        type: "getHelpHistory",
-        data: {
-          pointId: options.pointId, // 假设通过 URL 参数传递 pointId
-        },
+        type: "getEventByOpenId",
       },
       success: (res) => {
         console.log("获取的用户帮助信息:", res);
         const { data } = res.result;
         this.setData({
+          eventList: data,
           info: JSON.stringify(data, null, 2),
         });
-        this.formatData(res);
+        wx.hideLoading();
+        // this.formatData(res);
       },
       fail: (err) => {
         console.error("调用云函数失败:", err);
       },
+    });
+  },
+
+  touchEnd() {
+    this.setData({
+      isPress: -1,
+    });
+  },
+
+  touchStart(e) {
+    const { index } = e.currentTarget.dataset;
+    this.setData({
+      isPress: index,
+    });
+  },
+
+  toDetail(event) {
+    const help = event.currentTarget.dataset.help;
+    wx.navigateTo({
+      url: `../help-detail/index?help=${JSON.stringify(help)}`,
     });
   },
 

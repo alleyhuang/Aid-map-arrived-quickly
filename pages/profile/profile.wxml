@@ -8,23 +8,27 @@
 </view>
 
 <!-- 内容区，padding-top避开header -->
-<scroll-view scroll-y class="main-scroll" style="height:calc(100vh - {{statusBarHeightRpx + 260}}rpx); padding-top:{{statusBarHeightRpx + 260}}rpx;">
+<scroll-view
+  scroll-y
+  class="main-scroll"
+  style="height:calc(100vh - {{statusBarHeightRpx + 260}}rpx); padding-top:{{statusBarHeightRpx + 260}}rpx;"
+>
   <view class="profile-card">
-    <view class="avatar"></view>
-    <view class="nickname">微信用户#18006202552</view>
+    <image class="avatar" src="./images/userimg.jpeg"/>
+    <view class="nickname">远图速达</view>
   </view>
 
   <view class="profile-btns">
-    <view class="profile-btn">
-      <view class="icon-placeholder"></view>
-      <text>急救消息</text>
+    <view class="profile-btn" bind:tap="toHistory">
+      <image class="icon-placeholder" src="./images/historyevent.svg"/>
+      <text>历史事件</text>
     </view>
     <view class="profile-btn">
-      <view class="icon-placeholder"></view>
+      <image class="icon-placeholder" src="./images/topinfo.svg"/>
       <text>免责声明</text>
     </view>
     <view class="profile-btn">
-      <view class="icon-placeholder"></view>
+      <image class="icon-placeholder" src="./images/profileinfo.svg"/>
       <text>我的档案</text>
     </view>
   </view>
@@ -35,4 +39,4 @@
   </view>
 </scroll-view>
 
-<tabbar active="profile" /> 
+<tabbar active="profile" />

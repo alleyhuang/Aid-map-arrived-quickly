@@ -13,6 +13,10 @@
   font-weight: 400;
 }
 
+.press {
+  background-color: #f2f2f2;
+}
+
 .info {
   width: 100%;
 }

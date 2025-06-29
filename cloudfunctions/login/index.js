@@ -13,6 +13,17 @@ const selectRecord = async () => {
   return await db.collection("help_requests").get();
 };
 
+// 获取openid
+const getOpenId = async () => {
+  // 获取基础信息
+  const wxContext = cloud.getWXContext();
+  return {
+    openid: wxContext.OPENID,
+    appid: wxContext.APPID,
+    unionid: wxContext.UNIONID,
+  };
+};
+
 // 创建集合
 const createCollection = async () => {
   try {
@@ -66,14 +77,75 @@ const createCollection = async () => {
 const insertRecord = async (event) => {
   try {
     const insertRecord = event.data;
+    const database = event.database;
+    const insertData =
+      database === "users"
+        ? {
+          // 注册用户数据字段
+            data: {
+              _id: insertRecord.openid,
+              name: insertRecord.name,
+              phone: insertRecord.phone,
+              location: insertRecord.location,
+              helpRange: insertRecord.range,
+              helpType: insertRecord.helpType,
+              helpDetail: insertRecord.helpDetail,
+              certificates: insertRecord.certificates,
+              isProfessional: insertRecord.regType,
+              status: insertRecord.status,
+              registerTime: insertRecord.registerTime,
+              lastActiveTime: insertRecord.lastActiveTime,
+            },
+          }
+        : {
+          // 请求求助事件数据字段
+            data: {
+              _id: insertRecord.openid,
+              eventId: insertRecord.eventId,
+              selectedTypes: insertRecord.selectedTypes,
+              urgency: insertRecord.urgency,
+              phone: insertRecord.phone,
+              contactName: insertRecord.contactName,
+              contactRelation: insertRecord.contactRelation,
+              helpTypes: insertRecord.helpTypes,
+              otherType: insertRecord.otherType,
+              desc: insertRecord.desc,
+              resolve: insertRecord.resolve,
+              images: insertRecord.images,
+              location: insertRecord.location,
+              status: insertRecord.status,
+              createTime: insertRecord.createTime,
+              updateTime: insertRecord.updateTime,
+            },
+          };
     // 插入数据
-    await db.collection("sales").add({
-      data: {
-        region: insertRecord.region,
-        city: insertRecord.city,
-        sales: Number(insertRecord.sales),
-      },
-    });
+    await db.collection(database).add(insertData);
+    return {
+      success: true,
+      data: event.data,
+    };
+  } catch (e) {
+    return {
+      success: false,
+      errMsg: e,
+    };
+  }
+};
+
+// 更新数据
+const updateRecord = async (event) => {
+  try {
+    // 遍历修改数据库信息
+    await db
+      .collection("help_requests")
+      .where({
+        eventId: event.data.eventId,
+      })
+      .update({
+        data: {
+          resolve: event.data.resolve,
+        },
+      });
     return {
       success: true,
       data: event.data,
@@ -90,7 +162,18 @@ const insertRecord = async (event) => {
 const getHelpHistory = async () => {
   // 返回数据库查询结果
   return await db.collection("help_history").get();
-}
+};
+
+// 查询 eventId 等于用户 openid 的数据
+const getEventByOpenId = async () => {
+  const { openid } = await getOpenId();
+  return await db
+    .collection("help_requests")
+    .where({
+      eventId: openid,
+    })
+    .get();
+};
 
 // 云函数入口函数
 exports.main = async (event, context) => {
@@ -109,5 +192,7 @@ exports.main = async (event, context) => {
       return await deleteRecord(event);
     case "getHelpHistory":
       return await getHelpHistory();
+    case "getEventByOpenId":
+      return await getEventByOpenId();
   }
 };

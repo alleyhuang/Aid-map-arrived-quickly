@@ -1,16 +1,28 @@
+<wxs module="util" src="../help-detail/util.wxs"></wxs>
+
 <view class="container">
   <view class="top">
     <view class="app-name">援图速达</view>
-    <view class="sub-name">在此处可以查看求助事件的具体信息</view>
+    <view class="sub-name">在此处可以查看与您有关的历史求助事件</view>
   </view>
   <view class="title">历史事件页</view>
   <view class="info">
-    <view wx:for="{{3}}" wx:key="*this" class="item">
-      <view class="txt">事件 id: 10001</view>
-      <view class="txt">发布时间: 2025 年 06 月 26 日</view>
-      <view class="txt">帮助类型: 医疗急救类</view>
-      <view class="txt">求助位置: 北京</view>
+    <view
+      wx:for="{{eventList}}"
+      wx:key="*this"
+      class="item {{isPress === index ? 'press' : ''}}"
+      wx:for-item="help"
+      data-help="{{help}}"
+      data-index="{{index}}"
+      bindtap="toDetail"
+      bind:touchstart="touchStart"
+      bind:touchend="touchEnd"
+    >
+      <view class="txt">事件 id: {{help.eventId}}</view>
+      <view class="txt">发布时间: {{util.formatDate(help.createTime)}}</view>
+      <view class="txt">帮助类型: {{help.selectedTypes}}</view>
+      <view class="txt">求助位置: {{help.location.address}}</view>
     </view>
-    <view>获取历史帮助信息： {{ info }}</view>
+    <!-- <view>获取历史帮助信息： {{ info }}</view> -->
   </view>
 </view>

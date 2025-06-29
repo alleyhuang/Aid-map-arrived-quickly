@@ -1,0 +1,8 @@
+var formatDate = function(date) {
+  var time = getDate(date);
+  return time.getFullYear() + '-' + (time.getMonth() + 1) + '-' + time.getDate() + ' ' + time.getHours() + ':' + time.getMinutes();
+}
+
+module.exports = {
+  formatDate: formatDate,
+}

@@ -1,0 +1,57 @@
+.container {
+  position: relative;
+  overflow: hidden;
+  padding: 20rpx;
+}
+
+.event_info {
+  min-height: 300rpx;
+  border: 2rpx solid #ebebeb;
+  margin-bottom: 20rpx;
+  padding-left: 30rpx;
+}
+
+.press {
+  background-color: #f2f2f2;
+}
+
+.desc,.img,.position,.contact {
+  min-height: 180rpx;
+  border: 2rpx solid #ebebeb;
+  margin-bottom: 20rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16rpx;
+}
+
+.txt {
+  margin-top: 20rpx;
+}
+
+.top {
+  width: 100%;
+}
+
+.app-name {
+  font-size: 48rpx;
+  font-weight: 400;
+}
+
+.sub-name {
+  font-size: 24rpx;
+  font-weight: 400;
+  color: #6c7b8e;
+}
+
+.title {
+  height: 110rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20rpx;
+  color: #00cb90;
+  border: 1rpx solid #ebebeb;
+  border-radius: 16rpx;
+  width: 100%;
+}

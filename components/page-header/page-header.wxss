@@ -1,19 +1,13 @@
 .page-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  z-index: 100;
-  background: #00C37D;
-}
-
-.header-content {
-  width: 100vw;
-  height: 180rpx;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 180rpx;
+  z-index: 100;
+  background: #00C37D;
+  border-radius: 16rpx;
 }
 
 .header-title {

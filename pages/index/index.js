@@ -115,10 +115,9 @@ Page({
     });
   },
 
-  onMarkerTap(e) {
-    const eventData = JSON.stringify(e);
+  onMarkerTap() {
     wx.navigateTo({
-      url: `/pages/help-history/index?eventData=${encodeURIComponent(eventData)}`
+      url: `/pages/help-detail/index`
     });
   },
 

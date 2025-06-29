@@ -1,7 +1,7 @@
 {
   "navigationBarTitleText": "注册信息",
   "usingComponents": {
-    "tabbar": "/components/tabbar/tabbar",
-    "page-header": "/components/page-header/page-header"
+    "tabbar": "../../components/tabbar/tabbar",
+    "page-header": "../../components/page-header/page-header"
   }
 } 

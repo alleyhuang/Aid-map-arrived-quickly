@@ -1,20 +1,29 @@
 <view class="tabbar">
   <view class="tab-item {{active==='index'?'active':''}}" bindtap="onTab" data-page="index">
     <view class="tab-icon-svg">
-      <image class="tabbar-icon" src="data:image/svg+xml;utf8,<svg width='48' height='48' xmlns='http://www.w3.org/2000/svg'><rect x='8' y='8' width='32' height='32' fill='%23e60012'/></svg>" />
+      <image
+        class="tabbar-icon"
+        src="{{active==='index' ? './images/home-red.svg' : './images/home.svg'}}"
+      />
     </view>
     <text class="tab-item-text">首页</text>
   </view>
   <view class="tab-item {{active==='chat'?'active':''}}" bindtap="onTab" data-page="chat">
     <view class="tab-icon-svg">
-      <image class="tabbar-icon" src="data:image/svg+xml;utf8,<svg width='48' height='48' xmlns='http://www.w3.org/2000/svg'><circle cx='24' cy='24' r='16' fill='%2300C37D'/></svg>" />
+      <image
+        class="tabbar-icon"
+        src="{{active==='chat'?'./images/event-red.svg':'./images/event.svg'}}"
+      />
     </view>
     <text class="tab-item-text">所有事件</text>
   </view>
   <view class="tab-item {{active==='profile'?'active':''}}" bindtap="onTab" data-page="profile">
     <view class="tab-icon-svg">
-      <image class="tabbar-icon" src="data:image/svg+xml;utf8,<svg width='48' height='48' xmlns='http://www.w3.org/2000/svg'><polygon points='24,8 29,20 42,20 32,28 36,40 24,32 12,40 16,28 6,20 19,20' fill='%23ff9900'/></svg>" />
+      <image
+        class="tabbar-icon"
+        src="{{active==='profile' ? './images/profile-red.svg' : './images/profile.svg'}}"
+      />
     </view>
     <text class="tab-item-text">我的</text>
   </view>
-</view> 
+</view>
