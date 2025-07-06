@@ -153,6 +153,7 @@
   display: flex;
   align-items: center;
   gap: 12rpx;
+  justify-content: space-between;
 }
 
 .location-btn {

@@ -1,0 +1,17 @@
+<view class="container">
+  <view class="section">
+    <view class="content">用户名称：{{userInfo.name}}</view>
+  </view>
+  <view class="section">
+    <view class="content">可帮助地区：{{userInfo.location.address}}</view>
+  </view>
+  <view class="section">
+    <view class="content">可供帮助类型：{{userInfo.helpType}}</view>
+  </view>
+  <view class="section">
+    <view class="content">注册时间：{{userInfo.registerTime}}</view>
+  </view>
+  <view class="section">
+    <view class="content">帮助范围：{{userInfo.range}}</view>
+  </view>
+</view>

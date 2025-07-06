@@ -17,6 +17,10 @@ Page({
     this.getHelpHistory();
   },
 
+  onShow() {
+    this.getHelpHistory();
+  },
+
   getHelpHistory() {
     wx.cloud.callFunction({
       name: "login",

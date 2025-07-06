@@ -2,7 +2,7 @@
 const cloud = require("wx-server-sdk");
 
 cloud.init({
-  env: "cloud1-0gqaia6j7d5e2f00",
+  env: "cloudbase-0gl4nb7m872c6379",
 });
 
 const db = cloud.database();
@@ -11,6 +11,12 @@ const db = cloud.database();
 const selectRecord = async () => {
   // 返回数据库查询结果
   return await db.collection("help_requests").get();
+};
+
+// 获取注册信息
+const getRegisterInfo = async () => {
+  const { openid } = await getOpenId();
+  return await db.collection("users").where({ userid: openid }).get();
 };
 
 // 获取openid
@@ -22,6 +28,13 @@ const getOpenId = async () => {
     appid: wxContext.APPID,
     unionid: wxContext.UNIONID,
   };
+};
+
+// 验证用户是否注册
+const checkRegister = async () => {
+  const { openid } = await getOpenId();
+  const result = await db.collection("users").where({ userid: openid }).get();
+  return result;
 };
 
 // 创建集合
@@ -76,29 +89,31 @@ const createCollection = async () => {
 // 新增数据
 const insertRecord = async (event) => {
   try {
+    const { openid } = await getOpenId();
     const insertRecord = event.data;
     const database = event.database;
     const insertData =
       database === "users"
         ? {
-          // 注册用户数据字段
+            // 注册用户数据字段
             data: {
               _id: insertRecord.openid,
+              userid: openid,
               name: insertRecord.name,
               phone: insertRecord.phone,
               location: insertRecord.location,
-              helpRange: insertRecord.range,
               helpType: insertRecord.helpType,
               helpDetail: insertRecord.helpDetail,
               certificates: insertRecord.certificates,
               isProfessional: insertRecord.regType,
               status: insertRecord.status,
+              range: insertRecord.range,
               registerTime: insertRecord.registerTime,
               lastActiveTime: insertRecord.lastActiveTime,
             },
           }
         : {
-          // 请求求助事件数据字段
+            // 请求求助事件数据字段
             data: {
               _id: insertRecord.openid,
               eventId: insertRecord.eventId,
@@ -170,7 +185,55 @@ const getEventByOpenId = async () => {
   return await db
     .collection("help_requests")
     .where({
-      eventId: openid,
+      eventId: db.RegExp({
+        regexp: openid,
+        options: "i", // 忽略大小写
+      }),
+    })
+    .get();
+};
+
+// 首页地图展示正在进行中的事件
+const getActiveEvents = async () => {
+  return await db
+    .collection("help_requests")
+    .where({
+      resolve: false,
+    })
+    .get();
+};
+
+const getEventByEventId = async (eventId) => {
+  return await db
+    .collection("help_requests")
+    .where({
+      eventId,
+    })
+    .get();
+};
+
+// 获取发布者正在进行的事件
+const getActiveEventsByUser = async () => {
+  const { openid } = await getOpenId();
+  return await db
+    .collection("help_requests")
+    .where({
+      eventId: db.RegExp({
+        regexp: openid,
+        options: "i", // 忽略大小写
+      }),
+      resolve: false,
+    })
+    .get();
+};
+
+const getDetailByll = async (event) => {
+  const { latitude, longitude } = event.data;
+  return await db
+    .collection("help_requests")
+    .where({
+      "location.latitude": latitude,
+      "location.longitude": longitude,
     })
     .get();
 };
@@ -178,6 +241,16 @@ const getEventByOpenId = async () => {
 // 云函数入口函数
 exports.main = async (event, context) => {
   switch (event.type) {
+    case "getEventByEventId":
+      return await getEventByEventId(event.eventId);
+    case "checkRegister":
+      return await checkRegister();
+    case "getRegisterInfo":
+      return await getRegisterInfo();
+    case "getDetailByll":
+      return await getDetailByll(event);
+    case "getActiveEvents":
+      return await getActiveEvents();
     case "getOpenId":
       return await getOpenId();
     case "createCollection":
@@ -194,5 +267,7 @@ exports.main = async (event, context) => {
       return await getHelpHistory();
     case "getEventByOpenId":
       return await getEventByOpenId();
+    case "getActiveEventsByUser":
+      return await getActiveEventsByUser();
   }
 };

@@ -18,10 +18,12 @@
       bind:touchstart="touchStart"
       bind:touchend="touchEnd"
     >
-      <view class="txt">事件 id: {{help.eventId}}</view>
+      <!-- <view class="txt">事件 id: {{help.eventId}}</view> -->
       <view class="txt">发布时间: {{util.formatDate(help.createTime)}}</view>
       <view class="txt">帮助类型: {{help.selectedTypes}}</view>
       <view class="txt">求助位置: {{help.location.address}}</view>
+      <view class="txt">事件状态: {{help.resolve ? '已完成' : '未完成'}}</view>
+
     </view>
     <!-- <view>获取历史帮助信息： {{ info }}</view> -->
   </view>

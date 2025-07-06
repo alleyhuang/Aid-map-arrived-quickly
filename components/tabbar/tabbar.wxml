@@ -15,7 +15,7 @@
         src="{{active==='chat'?'./images/event-red.svg':'./images/event.svg'}}"
       />
     </view>
-    <text class="tab-item-text">所有事件</text>
+    <text class="tab-item-text">进行中事件</text>
   </view>
   <view class="tab-item {{active==='profile'?'active':''}}" bindtap="onTab" data-page="profile">
     <view class="tab-icon-svg">

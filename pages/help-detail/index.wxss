@@ -11,11 +11,30 @@
   padding-left: 30rpx;
 }
 
+.info {
+  width: 100%;
+}
+
+.contact-img {
+  width: 48rpx;
+  height: 48rpx;
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .press {
   background-color: #f2f2f2;
 }
 
-.desc,.img,.position,.contact {
+.desc,
+.img,
+.position,
+.contact {
   min-height: 180rpx;
   border: 2rpx solid #ebebeb;
   margin-bottom: 20rpx;

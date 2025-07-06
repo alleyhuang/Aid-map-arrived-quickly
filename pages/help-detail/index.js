@@ -7,6 +7,25 @@ Page({
 
   onLoad(options) {
     this.getUserInfo();
+    if (options.eventId) {
+      console.log("eventId:", options.eventId);
+      this.getEventByEventId(options.eventId);
+      return;
+    }
+
+    if (options.active) {
+      wx.showLoading({
+        title: "加载中",
+      });
+      this.getActiveEventByUser();
+      return;
+    }
+
+    if (options.addressinfo) {
+      const addressinfo = JSON.parse(options.addressinfo);
+      this.getDetailByll(addressinfo);
+      return;
+    }
 
     if (!options.help) {
       // 获取用户上传数据
@@ -24,6 +43,88 @@ Page({
     });
 
     wx.hideLoading();
+  },
+
+  getEventByEventId(eventId) {
+    wx.cloud.callFunction({
+      name: "login",
+      data: {
+        type: "getEventByEventId",
+        eventId
+      },
+      success: (res) => {
+        console.log("getEventByEventId", res);
+
+        const { data } = res.result;
+        const info = {
+          ...data[0],
+          eventNewId: data[0].eventId.slice(0, 28),
+        };
+        this.setData({
+          eventInfo: info,
+        });
+        wx.hideLoading();
+        return;
+      },
+      fail: (err) => {
+        console.error("调用云函数失败:", err);
+      },
+    });
+
+    wx.hideLoading();
+  },
+
+  getActiveEventByUser() {
+    wx.cloud.callFunction({
+      name: "login",
+      data: {
+        type: "getActiveEventsByUser",
+      },
+      success: (res) => {
+        const { data } = res.result;
+        const info = {
+          ...data[0],
+          eventNewId: data[0].eventId.slice(0, 28),
+        };
+        this.setData({
+          eventInfo: info,
+        });
+        wx.hideLoading();
+        return;
+      },
+      fail: (err) => {
+        console.error("调用云函数失败:", err);
+      },
+    });
+
+    wx.hideLoading();
+  },
+
+  getDetailByll(addressinfo) {
+    wx.cloud.callFunction({
+      name: "login",
+      data: {
+        type: "getDetailByll",
+        data: addressinfo,
+        database: "help_requests",
+      },
+      success: (res) => {
+        console.log("获取的用户上传信息:", res);
+        const { data } = res.result;
+        const info = {
+          ...data[0],
+          eventNewId: data[0].eventId.slice(0, 28),
+        };
+        this.setData({
+          eventInfo: info,
+          info: JSON.stringify(data, null, 2),
+        });
+        // this.formatData(res);
+      },
+      fail: (err) => {
+        console.error("调用云函数失败:", err);
+      },
+    });
   },
 
   touchStart() {
@@ -69,7 +170,11 @@ Page({
       },
       success: (res) => {
         console.log("更新成功:", res);
-        this.getPointInfo();
+        const { data } = res.result;
+        this.setData({
+          eventInfo: data,
+        });
+        // this.getPointInfo();
         // wx.navigateBack({
         //   delta: 1,
         // });

@@ -239,12 +239,18 @@
 .location-txt {
   font-size: 28rpx;
   color: #999;
+  max-width: 540rpx;
 }
 
 .location-tip {
   font-size: 28rpx;
   color: #00c37d;
-  margin-left: 30rpx;
+  margin-left: 10rpx;
+  min-width: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  word-break: keep-all;
 }
 
 /* 提交按钮 */

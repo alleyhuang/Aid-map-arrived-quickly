@@ -23,11 +23,11 @@
       <image class="icon-placeholder" src="./images/historyevent.svg"/>
       <text>历史事件</text>
     </view>
-    <view class="profile-btn">
+    <view class="profile-btn" bind:tap="toDeclaration">
       <image class="icon-placeholder" src="./images/topinfo.svg"/>
       <text>免责声明</text>
     </view>
-    <view class="profile-btn">
+    <view class="profile-btn" bind:tap="toProfile">
       <image class="icon-placeholder" src="./images/profileinfo.svg"/>
       <text>我的档案</text>
     </view>

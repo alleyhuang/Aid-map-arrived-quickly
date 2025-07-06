@@ -77,7 +77,7 @@ Page({
           location: {
             latitude: res.latitude,
             longitude: res.longitude,
-            address: res.address,
+            address: res.name || res.address,
           },
         });
         wx.showToast({
@@ -116,16 +116,6 @@ Page({
     });
   },
 
-  onUploadCert() {
-    wx.chooseMessageFile({
-      count: 1,
-      type: "all",
-      success: (res) => {
-        wx.showToast({ title: "已上传", icon: "success" });
-      },
-    });
-  },
-
   getUserOpenid() {
     wx.cloud.callFunction({
       name: "login",
@@ -154,7 +144,6 @@ Page({
         database: "users",
       },
       success: (res) => {
-        debugger;
         console.log("插入数据成功:", res);
       },
       fail: (err) => {
@@ -180,6 +169,7 @@ Page({
     try {
       const userData = {
         _id: this.data.openid,
+        userid: this.data.openid,
         name: this.data.name,
         phone: this.data.phone,
         location: this.data.location,
@@ -192,21 +182,19 @@ Page({
         certificates: [], // 后续可添加上传功能
         isProfessional: this.data.regType === "pro",
         status: "在线",
+        range: this.data.range,
         registerTime: new Date(),
         lastActiveTime: new Date(),
       };
 
       this.insertData(userData);
 
+      this.subscribe();
+
       wx.showToast({
         title: "注册成功",
         icon: "success",
-        duration: 2000,
-        success: () => {
-          setTimeout(() => {
-            wx.navigateBack();
-          }, 2000);
-        },
+        duration: 1000,
       });
     } catch (error) {
       console.error("注册失败：", error);
@@ -215,6 +203,21 @@ Page({
         icon: "error",
       });
     }
+  },
+
+  // 订阅消息
+  subscribe() {
+    debugger;
+    wx.requestSubscribeMessage({
+      tmplIds: ["eFLGRhgHwN39bY_h_s0OzPrYK2WnUeKB2kA6YwgBkhA"],
+      success: () => {
+        wx.navigateBack();
+      },
+      fail: (res) => {
+        debugger;
+        console.log(res);
+      },
+    });
   },
 
   onAgreeChange(e) {

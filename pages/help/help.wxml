@@ -89,31 +89,6 @@
         />
       </view>
 
-      <!-- 图片上传 -->
-      <view class="form-section">
-        <view class="form-label">上传图片 <text class="tip">（选填，最多3张）</text></view>
-        <view class="image-uploader">
-          <view class="image-list">
-            <view wx:for="{{formData.images}}" wx:key="*this" class="image-item">
-              <image
-                src="{{item}}"
-                mode="aspectFill"
-                bind:tap="onPreviewImage"
-                data-url="{{item}}"
-              />
-              <view class="delete-btn" catch:tap="onDeleteImage" data-index="{{index}}">×</view>
-            </view>
-            <view
-              class="upload-btn"
-              bind:tap="onChooseImage"
-              wx:if="{{formData.images.length < 3}}"
-            >
-              <text class="upload-icon">+</text>
-            </view>
-          </view>
-        </view>
-      </view>
-
       <!-- 位置信息 -->
       <view class="form-section">
         <view class="form-label">求助位置</view>

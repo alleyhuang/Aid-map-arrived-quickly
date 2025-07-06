@@ -6,7 +6,9 @@
     "pages/help/help",
     "pages/chat/chat",
     "pages/help-detail/index",
-    "pages/help-history/index"
+    "pages/help-history/index",
+    "pages/my-info/index",
+    "pages/declaration/index"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

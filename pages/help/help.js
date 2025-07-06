@@ -48,25 +48,34 @@ Page({
     isSubmitting: false,
     statusBarHeight: 0,
     statusBarHeightRpx: 0,
+    access_token: "",
   },
 
   onLoad() {
-    // 防御app.globalData为undefined
-    const openid = app.globalData && app.globalData.openid;
-    if (!openid) {
-      wx.showToast({
-        title: "请先登录",
-        icon: "none",
-        duration: 2000,
-        success: () => {
-          setTimeout(() => {
-            wx.navigateTo({
-              url: "/pages/login/login",
-            });
-          }, 2000);
-        },
-      });
-    }
+    // this.getAppToken();
+  },
+
+  sendMsgTohelper(helpData) {
+    debugger;
+    /**
+     * grant_type: "client_credential",
+        appid: "wx5cf87678079c02a6",
+        secret: "d2bfe18629354620c89215166d755fa4",
+     */
+    wx.cloud.callFunction({
+      name: "subscribe",
+      data: {
+        type: "sendMsg",
+        helpData,
+      },
+      success: (res) => {
+        debugger;
+        console.log(res);
+      },
+      fail: (res) => {
+        debugger;
+      }
+    });
   },
 
   // 紧急程度选择
@@ -172,9 +181,6 @@ Page({
   // 选择图片
   async onChooseImage() {
     try {
-      if (wx.vibrateShort) {
-        wx.vibrateShort();
-      }
       const res = await wx.chooseImage({
         count: 3 - this.data.formData.images.length,
         sizeType: ["compressed"],
@@ -252,7 +258,7 @@ Page({
           location: {
             latitude: res.latitude,
             longitude: res.longitude,
-            address: res.address,
+            address: res.name || res.address,
           },
         });
         wx.showToast({
@@ -385,10 +391,6 @@ Page({
 
     // this.onSubmit();
 
-    wx.navigateTo({
-      url: "/pages/index/index",
-    });
-
     return;
 
     // 准备预览数据
@@ -428,6 +430,7 @@ Page({
         this.setData({
           openid,
         });
+        this.submit();
       },
       fail: (err) => {
         console.error("获取用户openid失败:", err);
@@ -444,7 +447,6 @@ Page({
         database: "help_requests",
       },
       success: (res) => {
-        debugger;
         console.log("插入数据成功:", res);
       },
       fail: (err) => {
@@ -453,37 +455,80 @@ Page({
     });
   },
 
+  submit() {
+    const helpData = {
+      _id: this.data.openid,
+      eventId: this.data.openid + `${new Date().getTime()}`,
+      ...this.data.formData,
+      location: this.data.location,
+      urgency: this.data.urgency,
+      selectedTypes: this.data.selectedTypes,
+      status: "active",
+      resolve: false,
+      createTime: new Date(),
+      updateTime: new Date(),
+    };
+
+    this.insertData(helpData);
+
+    wx.showToast({
+      title: "发布成功",
+      icon: "success",
+      duration: 1000,
+      success: () => {
+        setTimeout(() => {
+          wx.navigateBack();
+        }, 2000);
+      },
+    });
+    this.sendMsgTohelper(helpData);
+  },
+
+  handleSendMsg() {
+    const access_token = this.data.access_token;
+    const url = `https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=${access_token}`;
+    const data = {
+      touser: this.data.openid, // 用户的OpenID
+      template_id: "bLkKxv6pvn8WLOvYqysc1c3zx7-WLG759a9Re9rpXZU", // 模板ID
+      // url: "https://example.com", // 点击消息跳转的URL（可选）
+      miniprogram: {
+        // 跳小程序所需数据（可选）
+        appid: this.data.appid,
+        pagepath: "index",
+      },
+      data: {
+        thing1: {
+          value: "张三",
+        },
+        phone_number2: {
+          value: "13812345678",
+        },
+        thing3: {
+          value: "北京市朝阳区",
+        },
+        time5: {
+          value: "2025-06-24 12:00:00",
+        },
+        thing6: {
+          value: "10公里",
+        },
+      },
+    };
+    wx.request({
+      url,
+      method: "POST",
+      data,
+      success: (res) => {
+        console.log("sendres", res);
+      },
+    });
+  },
+
   // 提交表单
   async onSubmit() {
     try {
       // 获取用户 openid
-      await this.getUserOpenid();
-
-      const helpData = {
-        _id: this.data.openid,
-        eventId: this.data.openid,
-        ...this.data.formData,
-        location: this.data.location,
-        urgency: this.data.urgency,
-        selectedTypes: this.data.selectedTypes,
-        status: "active",
-        resolve: false,
-        createTime: new Date(),
-        updateTime: new Date(),
-      };
-
-      this.insertData(helpData);
-
-      wx.showToast({
-        title: "发布成功",
-        icon: "success",
-        duration: 1000,
-        // success: () => {
-        //   setTimeout(() => {
-        //     wx.navigateBack();
-        //   }, 2000);
-        // },
-      });
+      this.getUserOpenid();
     } catch (error) {
       wx.showToast({
         title: "发布失败，请重试",

@@ -1,0 +1,21 @@
+.container {
+  padding: 20rpx;
+  width: 750rpx;
+  background-color: #f5f6fa;
+}
+
+.section {
+  min-height: 265rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #ffffff;
+  width: 100%;
+  margin: 0 20rpx 10rpx;
+  border: 2rpx solid #e5eefd;
+  border-radius: 44rpx;
+}
+
+.content {
+  margin-left: 40rpx;
+}

@@ -1,0 +1,17 @@
+.container-dec {
+  padding: 20rpx;
+}
+
+.title {
+  margin-top: 20rpx;
+}
+
+.text {
+  margin: 16rpx 0;
+  font-size: 28rpx;
+}
+
+.content {
+  color: #6c7b8e;
+  font-size: 24rpx;
+}

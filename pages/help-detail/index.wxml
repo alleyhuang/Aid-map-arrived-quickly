@@ -13,7 +13,6 @@
       <view class="txt">需要的帮助类型：{{eventInfo.selectedTypes}}</view>
     </view>
     <view class="desc">情况描述：{{eventInfo.desc}}</view>
-    <view class="img">事件图片：{{eventInfo.images}}</view>
     <view class="position">求助位置： {{eventInfo.location.address}}</view>
     <view
       class="contact {{isPress ? 'press' : ''}}"
@@ -21,18 +20,20 @@
       bind:touchstart="touchStart"
       bind:touchend="touchEnd"
     >
+      <image src="./images/contact.svg" class="contact-img" />
       联系他
     </view>
     <view>
       <button
         type="primary"
-        wx:if="{{!eventInfo.resolve}}"
-        disabled="{{openid !== eventInfo.eventId}}"
+        wx:if="{{eventInfo.eventNewId === openid}}"
+        disabled="{{eventInfo.resolve}}"
         bind:tap="onCloseEvent"
       >
-        结束求助
+        {{eventInfo.resolve ? '求助已完成' : '结束求助'}}
       </button>
-      <button wx:else type="default">求助已完成</button>
+
+      <button wx:else type="primary" disabled>结束求助</button>
     </view>
     <!-- <view style="margin-top: 30rpx;">获取的信息： {{ info }}</view> -->
   </view>

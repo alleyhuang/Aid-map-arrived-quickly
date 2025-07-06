@@ -87,10 +87,6 @@
             placeholder="请输入自定义专业（15字内）"
           />
         </view>
-        <view class="form-section">
-          <view class="form-label">上传您的专业资质</view>
-          <view class="upload-btn" bind:tap="onUploadCert">上传图片/文档</view>
-        </view>
       </block>
 
       <!-- 志愿者表单 -->
@@ -139,12 +135,6 @@
           blockColor="#00C37D"
           bind:chang="onRangeChange"
         />
-      </view>
-
-      <view class="form-section">
-        <view class="form-label">实时位置共享授权</view>
-        <switch checked="{{shareLocation}}" name="shareLocation" color="#00C37D" />
-        <text class="tip">（有用户呼救时才会展示）</text>
       </view>
 
       <view class="form-section">
