@@ -45,6 +45,16 @@ Page({
     wx.hideLoading();
   },
 
+  toChuxing() {
+    debugger;
+    console.log('toChuxing');
+    
+    wx.navigateToMiniProgram({
+      appId: 'wx65cc950f42e8fff1',
+      path: '/modules/home/pages/index/index',
+    })
+  },
+
   getEventByEventId(eventId) {
     wx.cloud.callFunction({
       name: "login",

@@ -1,6 +1,6 @@
 <view class="page">
   <!-- 通用 header -->
-  <page-header title="注册" subtitle="感谢您的注册，每一次注册都有可能创造一次奇迹" />
+  <page-header title="成为帮助人" subtitle="感谢您自愿成为帮助人，希望您在帮助他人的过程中也保护好自身安全" />
 
   <scroll-view class="page-content" scroll-y show-scrollbar="{{false}}" enhanced="{{true}}">
     <view class="content-inner">
@@ -23,7 +23,7 @@
 
       <view class="form-section">
         <view class="form-label"
-          >姓名 <text class="tip">（务必填写真实姓名，不会直接展示，仅后台备案）</text></view
+          >姓名 <text class="tip">（可用昵称，方便沟通时称呼）</text></view
         >
         <input
           class="form-input"
@@ -35,8 +35,8 @@
 
       <view class="form-section">
         <view class="form-label"
-          >电话 <text class="tip">（可用微信授权，不会直接展示号码，呼救时可联系）</text></view
-        >
+          >电话 <text class="tip">（请务必输入可用于联系的真实号码，感谢您的帮助）</text>
+          </view>
         <input
           class="form-input"
           value="{{phone}}"
@@ -133,7 +133,7 @@
           activeColor="#00C37D"
           backgroundColor="#e5eefd"
           blockColor="#00C37D"
-          bind:chang="onRangeChange"
+          bindchange="onRangeChange"
         />
       </view>
 

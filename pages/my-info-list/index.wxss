@@ -1,0 +1,39 @@
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 0;
+  box-sizing: border-box;
+  margin: 0 20rpx;
+}
+
+.profile {
+  font-size: 40rpx;
+}
+
+.item {
+  min-height: 265rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #e0e0cf;
+  width: 100%;
+  margin: 0 20rpx 10rpx;
+  border: 2rpx solid #e5eefd;
+  border-radius: 44rpx;
+}
+
+.pause {
+  padding: 10rpx 20rpx;
+  background: aquamarine;
+  border-radius: 20rpx;
+  margin-bottom: 10rpx;
+}
+
+.delete {
+  padding: 10rpx 20rpx;
+  background: rgb(235, 137, 137);
+  border-radius: 20rpx;
+}

@@ -13,7 +13,15 @@
     },
     "useCompilerPlugins": false,
     "minifyWXML": true,
-    "condition": true
+    "condition": true,
+    "compileWorklet": false,
+    "uploadWithSourceMap": true,
+    "packNpmManually": false,
+    "minifyWXSS": true,
+    "localPlugins": false,
+    "disableUseStrict": false,
+    "swc": false,
+    "disableSWC": true
   },
   "compileType": "miniprogram",
   "simulatorPluginLibVersion": {},
@@ -28,5 +36,6 @@
   },
   "cloudfunctionTemplateRoot": "cloudfunctionTemplate/",
   "cloudfunctionRoot": "cloudfunctions/",
-  "condition": {}
+  "condition": {},
+  "libVersion": "3.8.8"
 }

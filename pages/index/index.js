@@ -64,7 +64,7 @@ Page({
       const { id, title, location } = h;
       const { lat, lng } = location;
       const marker = {
-        id,
+        id: Number(id),
         latitude: lat,
         longitude: lng,
         title,
@@ -148,8 +148,14 @@ Page({
 
   getPoint(e) {
     const { markerId } = e.detail;
+    if(String(markerId).length > 19) {
+      wx.showToast({
+        icon: 'error',
+        title: '该点不是帮助点',
+      })
+      return;
+    }
     const needhelp = this.data.markers.find((item) => item.id === markerId);
-    debugger;
     const addressinfo = {
       latitude: needhelp.latitude,
       longitude: needhelp.longitude,

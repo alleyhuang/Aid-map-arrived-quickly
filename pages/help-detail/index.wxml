@@ -12,8 +12,8 @@
       <view class="txt">发布时间：{{util.formatDate(eventInfo.createTime)}}</view>
       <view class="txt">需要的帮助类型：{{eventInfo.selectedTypes}}</view>
     </view>
-    <view class="desc">情况描述：{{eventInfo.desc}}</view>
-    <view class="position">求助位置： {{eventInfo.location.address}}</view>
+    <view class="position" bind:tap="toChuxing">立即去：{{eventInfo.location.address}}</view>
+
     <view
       class="contact {{isPress ? 'press' : ''}}"
       bind:tap="contactHim"

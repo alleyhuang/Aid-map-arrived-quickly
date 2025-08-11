@@ -8,7 +8,8 @@
     "pages/help-detail/index",
     "pages/help-history/index",
     "pages/my-info/index",
-    "pages/declaration/index"
+    "pages/declaration/index",
+    "pages/my-info-list/index"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

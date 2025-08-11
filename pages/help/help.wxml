@@ -24,7 +24,7 @@
       <!-- 联系方式 -->
       <view class="form-section">
         <view class="form-label"
-          >联系方式 <text class="tip">（不会直接展示，仅用于紧急联系）</text></view
+          >联系方式 <text class="tip">（请填写可用于联系的真实号码，仅帮助人可见）</text></view
         >
         <input
           type="number"

@@ -1,3 +1,5 @@
+<wxs module="util" src="./util.wxs"></wxs>
+
 <view class="container">
   <view class="section">
     <view class="content">用户名称：{{userInfo.name}}</view>
@@ -9,7 +11,7 @@
     <view class="content">可供帮助类型：{{userInfo.helpType}}</view>
   </view>
   <view class="section">
-    <view class="content">注册时间：{{userInfo.registerTime}}</view>
+    <view class="content">注册时间：{{util.formatDate(userInfo.registerTime)}}</view>
   </view>
   <view class="section">
     <view class="content">帮助范围：{{userInfo.range}}</view>

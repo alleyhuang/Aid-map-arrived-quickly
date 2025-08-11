@@ -1,28 +1,5 @@
 <view class="chat-header-safe"></view>
-<view class="chat-header">
-  <view class="chat-title">图援速达</view>
-  <view class="chat-subtitle">在此处可以对求助case进行实时讨论</view>
-</view>
-
-<scroll-view scroll-y="true" class="chat-scroll">
-  <view class="chat-announcement">
+ <view class="chat-announcement">
     <text>{{announcement}}</text>
   </view>
-  
-  <block wx:for="{{messages}}" wx:key="index">
-    <view class="forum-msg {{item.role}}">
-      <view class="forum-meta">
-        <text class="forum-identity">{{item.role==='user'?'求助者':'帮助人-'+item.type}}</text>
-        <text class="forum-time">{{item.time}}</text>
-      </view>
-      <view class="forum-content">{{item.content}}</view>
-    </view>
-  </block>
-</scroll-view>
-
-<view class="forum-input-bar">
-  <input class="forum-input" placeholder="请输入内容..." value="{{inputValue}}" bindinput="onInput" />
-  <button class="forum-send-btn" bindtap="onSend">发送</button>
-</view>
-
 <tabbar active="chat" /> 

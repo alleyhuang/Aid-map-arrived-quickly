@@ -31,7 +31,7 @@ Page({
 
   toProfile() {
     wx.navigateTo({
-      url: "../my-info/index",
+      url: "../my-info-list/index",
     });
   },
 });

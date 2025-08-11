@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "注册信息",
+  "navigationBarTitleText": "帮助人信息录入",
   "usingComponents": {
     "tabbar": "../../components/tabbar/tabbar",
     "page-header": "../../components/page-header/page-header"

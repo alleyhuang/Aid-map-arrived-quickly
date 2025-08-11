@@ -5,7 +5,7 @@ Page({
     messages: [],
     inputValue: '',
     helpRequestId: null, // 关联的求助ID
-    announcement: '该求助为紧急呼救，无更多信息，若有，求助者可在此沟通页面补充信息。'
+    announcement: '已经向附近帮助人发送您的特急求助，并且正在持续展示您的实时定位。请同时寻求更多可能的救援。'
   },
 
   onLoad(options) {

@@ -22,7 +22,7 @@
 </view>
 <view class="pro-bar">
   <view class="pro-bar-text">我有专业能力，可以帮助他人</view>
-  <button class="pro-bar-btn" bindtap="onRegister">立即注册</button>
+  <button class="pro-bar-btn" bindtap="onRegister">成为帮助人</button>
 </view>
 <view class="map-area map-area-large">
   <map
