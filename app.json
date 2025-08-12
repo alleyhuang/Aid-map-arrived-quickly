@@ -15,7 +15,7 @@
     "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTextStyle": "black",
     "navigationStyle": "default",
-    "navigationBarTitleText": "应急地图"
+    "navigationBarTitleText": "援图速达"
   },
   "style": "v2",
   "renderer": "webview",
